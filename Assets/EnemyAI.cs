@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
     private GameObject player;
     public int health;
     public int contactDamage;
-    public int movementSpeed;
+    public float movementSpeed;
     public int reactionTime;
     public int contactDamageRate;
     private int contactFrameCounter;

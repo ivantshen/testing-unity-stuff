@@ -5,13 +5,16 @@ using UnityEngine;
 public class BulletMotion : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public int bulletSpeed;
+    private float bulletSpeed;
     private int bulletDamage;
 
     // Update is called once per frame
     void Update()
     {
         rb.velocity = transform.right*bulletSpeed;
+    }
+    void assignSpeed(float spd){
+        bulletSpeed = spd;
     }
     void assignDamage(int dmg){
         bulletDamage = dmg;
@@ -20,6 +23,9 @@ public class BulletMotion : MonoBehaviour
         if (other.gameObject.tag=="Enemy"){
             other.gameObject.GetComponent<EnemyAI>().decreaseHealth(bulletDamage);
         }
-        Destroy(gameObject);
+        if(other.gameObject.tag!="PlayerBullet"){
+          Destroy(gameObject);  
+        }
+        
     }
 }
