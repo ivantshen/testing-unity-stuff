@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     public float reactionTime; //Reaction time in ms
     public float contactDamageRateInSeconds; // How often the player is damaged in seconds
     public bool canCollideWithEnemy;
+    public bool cantMove;
     private bool allowTracking = true;
     private bool allowDirectionChange = true;
     private bool allowContactDamage = true;
@@ -29,7 +30,7 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(waitToTrack());
         rb.velocity = transform.right*movementSpeed;  
         }  
-        if(player==null){
+        if(player==null&&!cantMove){
             rb.velocity = new Vector2(0,0);
         }
     }
@@ -47,13 +48,13 @@ public class EnemyAI : MonoBehaviour
         allowDirectionChange = false;
         int directionRoll = Random.Range(0,2);
             if(directionRoll==0){
-                rb.velocity = transform.up*movementSpeed*(reactionTime/1000.0f);
+                rb.velocity = transform.up*movementSpeed*3;
             }else if(directionRoll==1){
-                rb.velocity = transform.up*-movementSpeed*(reactionTime/1000.0f);
+                rb.velocity = transform.up*-movementSpeed*3;
             }else{
-                rb.velocity = transform.right*-movementSpeed*(reactionTime/1000.0f);
+                rb.velocity = transform.right*-movementSpeed*3;
             }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(reactionTime/5000.0f);
         allowDirectionChange = true;
     }
     IEnumerator contactDamagePlayer(Collider2D other){
