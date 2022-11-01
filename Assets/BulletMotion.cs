@@ -7,7 +7,6 @@ public class BulletMotion : MonoBehaviour
     public Rigidbody2D rb;
     private float bulletSpeed;
     private int bulletDamage;
-
     // Update is called once per frame
     void Update()
     {
