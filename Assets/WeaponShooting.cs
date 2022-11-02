@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class WeaponShooting : MonoBehaviour
 {
     public int bulletDamage;
     public float bulletSpeed;
     public GameObject bullet;
     public float fireRate;
+    public int numBarrels;
     private bool allowFire = true;
 
     // Update is called once per frame
@@ -19,10 +20,12 @@ public class PlayerShooting : MonoBehaviour
     }
     IEnumerator generateBullet(){
         allowFire = false;
-            GameObject newBullet = Instantiate(bullet,transform.GetChild(1).transform.position,transform.GetChild(1).transform.rotation) as GameObject;
-            Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(),GetComponent<Collider2D>());
+        for(int i=0;i<numBarrels;i++){
+            GameObject newBullet = Instantiate(bullet,transform.GetChild(i).position,transform.GetChild(i).rotation) as GameObject;
             newBullet.SendMessage("assignDamage",bulletDamage);
-            newBullet.SendMessage("assignSpeed",bulletSpeed);
+            newBullet.SendMessage("assignSpeed",bulletSpeed); 
+        }
+            
             yield return new WaitForSeconds(fireRate);
             allowFire = true;
     }

@@ -17,9 +17,9 @@ public class SpecialAbilityHunter : MonoBehaviour
             StartCoroutine(waitForSpecialCD());
         }
         if(Input.GetKeyDown("space")&&currentSpecialCD==0){
-            for(int i=1;i<4;i++){
-            GameObject newBullet = Instantiate(trap,transform.GetChild(i).transform.position,transform.GetChild(i).transform.rotation) as GameObject;
-            Physics2D.IgnoreCollision(newBullet.GetComponent<Collider2D>(),GetComponent<Collider2D>());
+            Transform weapon = transform.Find("Weapon").transform;
+            for(int i=0;i<4;i++){
+            GameObject newBullet = Instantiate(trap,weapon.GetChild(i).transform.position,weapon.GetChild(i).transform.rotation) as GameObject;
             newBullet.SendMessage("assignDamage",trapDamage);
             newBullet.SendMessage("assignSpeed",trapSpeed);   
             }

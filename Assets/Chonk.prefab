@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4963844875421197635}
   - component: {fileID: 4963844875421197692}
   - component: {fileID: 4963844875421197693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chonk
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,5 +159,5 @@ MonoBehaviour:
   reactionTime: 50
   contactDamageRateInSeconds: 2
   canCollideWithEnemy: 0
-  mainCamera: {fileID: 0}
+  cantMove: 0
   rb: {fileID: 4963844875421197692}

@@ -15,18 +15,18 @@ public class EnemyAI : MonoBehaviour
     private bool allowTracking = true;
     private bool allowDirectionChange = true;
     private bool allowContactDamage = true;
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
     public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(allowTracking&&player!=null){
+        if(allowTracking){
         StartCoroutine(waitToTrack());
         rb.velocity = transform.right*movementSpeed;  
         }  
@@ -34,7 +34,20 @@ public class EnemyAI : MonoBehaviour
             rb.velocity = new Vector2(0,0);
         }
     }
+    
     IEnumerator waitToTrack(){
+        Vector3 position = transform.position;
+        GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        float distance = Mathf.Infinity;
+        if(allPlayers.Length!=0){
+        foreach (GameObject currentPlayer in allPlayers){
+            Vector3 diff = currentPlayer.transform.position - position;
+            float currentDistance = diff.sqrMagnitude;
+            if(currentDistance<distance){
+                player = currentPlayer;
+                distance = currentDistance;
+            }
+        }
         allowTracking=false;
         Vector3 playerPosition = mainCamera.WorldToScreenPoint(player.transform.localPosition);
         Vector3 currentPosition = mainCamera.WorldToScreenPoint(transform.localPosition);
@@ -43,6 +56,7 @@ public class EnemyAI : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f,0f,angle);
         yield return new WaitForSeconds(reactionTime/1000.0f);
         allowTracking=true;
+        }
     }
     IEnumerator directionChange(){
         allowDirectionChange = false;
@@ -59,8 +73,13 @@ public class EnemyAI : MonoBehaviour
     }
     IEnumerator contactDamagePlayer(Collider2D other){
         allowContactDamage = false;
-        other.gameObject.GetComponent<Player>().decreaseHealth(contactDamage); 
-        Debug.Log(other.gameObject.GetComponent<Player>().health);
+        if(other.gameObject.GetComponent<Player>()!=null){
+          other.gameObject.GetComponent<Player>().decreaseHealth(contactDamage);   
+          Debug.Log(other.gameObject.GetComponent<Player>().health);
+        }else if(other.gameObject.GetComponent<SentryAI>()!=null){
+            other.gameObject.GetComponent<SentryAI>().decreaseHealth(contactDamage);   
+        }
+        
         yield return new WaitForSeconds(contactDamageRateInSeconds);
         allowContactDamage = true;
     }

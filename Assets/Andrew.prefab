@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 268859042750913540}
   - component: {fileID: 268859042750913541}
   - component: {fileID: 268859042750913562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Andrew
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,5 +159,5 @@ MonoBehaviour:
   reactionTime: 250
   contactDamageRateInSeconds: 1.5
   canCollideWithEnemy: 0
-  mainCamera: {fileID: 0}
+  cantMove: 0
   rb: {fileID: 268859042750913541}

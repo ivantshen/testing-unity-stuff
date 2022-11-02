@@ -13,13 +13,16 @@ public class CaltropMotion : MonoBehaviour
     SpriteRenderer thisSpriteRenderer;
     void Start(){
         thisSpriteRenderer = GetComponent<SpriteRenderer>();
+        Physics2D.IgnoreLayerCollision(7,3,true);
+        Physics2D.IgnoreLayerCollision(7,7,true);
+        Physics2D.IgnoreLayerCollision(7,8,true);
     }
-    void Update()
+    void FixedUpdate()
     {
         if(numberOfHits<=0){
             Destroy(gameObject);
         }
-        transform.Rotate(Vector3.up*Time.deltaTime*(bulletSpeed/10.0f));
+        transform.Rotate(Vector3.right*Time.deltaTime*(bulletSpeed/10.0f));
         if(bulletSpeed>0&&allowVelocityDecrease){
             StartCoroutine(velocityFalloff());
         }
@@ -54,8 +57,10 @@ public class CaltropMotion : MonoBehaviour
         allowHit=true;
         }
     private void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.tag!="Player"){
         if (other.gameObject.tag=="Enemy"&&allowHit&&numberOfHits>0){ 
             StartCoroutine(damageEnemy(other));
+        }
         }
     }
 }

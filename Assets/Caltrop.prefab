@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1840876096328579887}
   - component: {fileID: 1840876096328579886}
   - component: {fileID: 1840876096328579889}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Caltrop
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}

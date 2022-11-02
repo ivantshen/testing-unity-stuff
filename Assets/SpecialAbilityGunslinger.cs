@@ -11,16 +11,29 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     private bool allowSpecialCDDecrease = true;
     private bool allowSpecialLengthDecrease = true;
     // Update is called once per frame
+    void Start(){
+        transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
+    }
     void Update()
     {
-        if(currentSpecialCD>0&&allowSpecialCDDecrease){
+        if(Input.GetAxisRaw("Horizontal")>0){
+            transform.Find("GunslingerCowboyHat").transform.localRotation = Quaternion.identity;
+        }else if(Input.GetAxisRaw("Horizontal")<0){
+            transform.Find("GunslingerCowboyHat").transform.localRotation = Quaternion.Euler(0,180,0);
+        }
+        if(allowSpecialCDDecrease&&currentSpecialCD>0){
             StartCoroutine(waitForSpecialCD());
         }
-        if(currentSpecialLength>0&&allowSpecialLengthDecrease){
+        if(allowSpecialLengthDecrease&&currentSpecialLength>0){
             StartCoroutine(waitForSpecialLength());
         }
-        if(Input.GetKeyDown("space")&&currentSpecialCD==0){
-            GetComponent<PlayerShooting>().fireRate/=2.0f;
+        if(currentSpecialCD==0&&Input.GetKeyDown("space")){
+            transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = true;
+            GameObject[] weapons = GameObject.FindGameObjectsWithTag("PlayerWeapon");
+            foreach (GameObject currentWeapon in weapons)
+            {
+              currentWeapon.GetComponent<WeaponShooting>().fireRate/=2.0f;  
+            }
             GetComponent<Player>().movementSpeed*=1.5f;
             currentSpecialLength+=specialLength;
             currentSpecialCD+=specialCD+specialLength;
@@ -37,7 +50,12 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     yield return new WaitForSeconds(1);
     currentSpecialLength--;  
     if(currentSpecialLength==0){
-        GetComponent<PlayerShooting>().fireRate*=2.0f;
+        transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
+        GameObject[] weapons = GameObject.FindGameObjectsWithTag("PlayerWeapon");
+            foreach (GameObject currentWeapon in weapons)
+        {
+              currentWeapon.GetComponent<WeaponShooting>().fireRate*=2.0f;  
+        }
         GetComponent<Player>().movementSpeed/=1.5f;
     }
     allowSpecialLengthDecrease = true;
