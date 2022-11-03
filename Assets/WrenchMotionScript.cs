@@ -8,6 +8,8 @@ public class WrenchMotionScript : MonoBehaviour
     public Rigidbody2D rb;
     private float bulletSpeed;
     private int bulletDamage;
+    private int deathTime =4;
+    private bool allowDeathTimeCD = true;
     void Start()
     {
         Physics2D.IgnoreLayerCollision(7,3,true);
@@ -18,6 +20,18 @@ public class WrenchMotionScript : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = transform.right*bulletSpeed;
+        if(allowDeathTimeCD&&deathTime>0){
+StartCoroutine(deathTimeCountDown());
+        }
+    }
+    IEnumerator deathTimeCountDown(){
+        allowDeathTimeCD = false;
+        yield return new WaitForSeconds(1);
+        deathTime--;
+        if(deathTime==0){
+            Destroy(gameObject);
+        }
+        allowDeathTimeCD = true;
     }
      void assignSpeed(float spd){
         bulletSpeed = spd;

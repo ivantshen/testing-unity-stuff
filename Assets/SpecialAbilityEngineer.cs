@@ -14,8 +14,14 @@ public class SpecialAbilityEngineer : MonoBehaviour
     public int sentryLifeDuration;
     private int currentSpecialCD = 0;
     private bool allowSpecialCDDecrease = true;
+    private GameObject abilityBar;
     // Start is called before the first frame update
     // Update is called once per frame
+    void Start(){
+        abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
+        abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
+        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
+    }
     void Update()
     {
         if(currentSpecialCD>0&&allowSpecialCDDecrease){
@@ -37,6 +43,7 @@ public class SpecialAbilityEngineer : MonoBehaviour
     allowSpecialCDDecrease = false;
         yield return new WaitForSeconds(1);
         currentSpecialCD--;
+        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
     allowSpecialCDDecrease = true;
     }
 }

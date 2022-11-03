@@ -10,9 +10,13 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     private int currentSpecialLength = 0;
     private bool allowSpecialCDDecrease = true;
     private bool allowSpecialLengthDecrease = true;
+    private GameObject abilityBar;
     // Update is called once per frame
     void Start(){
         transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
+        abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
+        abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
+        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
     }
     void Update()
     {
@@ -43,6 +47,7 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     allowSpecialCDDecrease = false;
         yield return new WaitForSeconds(1);
         currentSpecialCD--;
+        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
     allowSpecialCDDecrease = true;
     }
     IEnumerator waitForSpecialLength(){

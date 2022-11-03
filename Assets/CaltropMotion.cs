@@ -9,7 +9,11 @@ public class CaltropMotion : MonoBehaviour
     private int bulletDamage;
     private bool allowVelocityDecrease = true;
     private int numberOfHits = 3;
+    private int deathTime = 25;
+    private bool allowDeathTimeCD = true;
     private bool allowHit = true;
+    private bool rotateRight;
+    private bool rotateLeft;
     SpriteRenderer thisSpriteRenderer;
     void Start(){
         thisSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,11 +26,30 @@ public class CaltropMotion : MonoBehaviour
         if(numberOfHits<=0){
             Destroy(gameObject);
         }
-        transform.Rotate(Vector3.right*Time.deltaTime*(bulletSpeed/10.0f));
+
+        if(rotateRight){
+         transform.Rotate(Vector3.back*Time.deltaTime*(bulletSpeed*22.0f));   
+        }else if(rotateLeft){
+        transform.Rotate(Vector3.forward*Time.deltaTime*(bulletSpeed*22.0f));   
+        }   
+        
+        
         if(bulletSpeed>0&&allowVelocityDecrease){
             StartCoroutine(velocityFalloff());
         }
+        if(allowDeathTimeCD&&deathTime>0){
+    StartCoroutine(deathTimeCountDown());
+        }
         rb.velocity = transform.right*bulletSpeed;
+    }
+     IEnumerator deathTimeCountDown(){
+        allowDeathTimeCD = false;
+        yield return new WaitForSeconds(1);
+        deathTime--;
+        if(deathTime==0){
+            Destroy(gameObject);
+        }
+        allowDeathTimeCD = true;
     }
     IEnumerator velocityFalloff(){
         allowVelocityDecrease = false;
@@ -40,20 +63,27 @@ public class CaltropMotion : MonoBehaviour
     void assignDamage(int dmg){
         bulletDamage = dmg;
     }
+    void assignRotateRight(bool tOrF){
+        rotateRight = tOrF;
+    }
+    void assignRotateLeft(bool tOrF){
+        rotateLeft = tOrF;
+    }
     IEnumerator damageEnemy(Collider2D other){
         allowHit=false;
         thisSpriteRenderer.color = Color.red;
         if(other){
-            other.gameObject.GetComponent<EnemyAI>().movementSpeed /= 15.0f;
+            other.gameObject.GetComponent<EnemyAI>().movementSpeed /= 45.0f;
+            bulletSpeed*=0.25f;
         }
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.55f);
         if(other){
-         other.gameObject.GetComponent<EnemyAI>().movementSpeed *= 15.0f ;   
+         other.gameObject.GetComponent<EnemyAI>().movementSpeed *= 45.0f ;   
          other.gameObject.GetComponent<EnemyAI>().decreaseHealth(bulletDamage);
         }
         thisSpriteRenderer.color = new Color(0.6f,0.6f,0.6f);
         numberOfHits--;   
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         allowHit=true;
         }
     private void OnTriggerStay2D(Collider2D other) {

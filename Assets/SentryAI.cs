@@ -6,6 +6,7 @@ public class SentryAI : MonoBehaviour
 {
     private GameObject enemy;
     private int health;
+    private int maxHealth;
     private float reactionSpeed;
     private bool allowTracking = true;
     private int timeTillDeath;
@@ -60,6 +61,7 @@ public class SentryAI : MonoBehaviour
         }
      }
     public void assignHealth(int hp){
+        maxHealth = hp;
         health = hp;
     }
     public void assignReactionTime(float reactionTime){

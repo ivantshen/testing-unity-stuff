@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     private GameObject player;
+    public int maxHealth;
     public int health;
     public int contactDamage;
     public float movementSpeed;
@@ -21,6 +22,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -75,7 +77,6 @@ public class EnemyAI : MonoBehaviour
         allowContactDamage = false;
         if(other.gameObject.GetComponent<Player>()!=null){
           other.gameObject.GetComponent<Player>().decreaseHealth(contactDamage);   
-          Debug.Log(other.gameObject.GetComponent<Player>().health);
         }else if(other.gameObject.GetComponent<SentryAI>()!=null){
             other.gameObject.GetComponent<SentryAI>().decreaseHealth(contactDamage);   
         }
