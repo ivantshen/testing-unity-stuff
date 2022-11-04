@@ -7,6 +7,7 @@ public class EnemyShooting : MonoBehaviour
     public int bulletDamage;
     public float bulletSpeed;
     public GameObject bullet;
+    public int numBullets;
     public float fireRate;
     private bool allowFire = true;
 
@@ -20,10 +21,12 @@ public class EnemyShooting : MonoBehaviour
     }
     IEnumerator generateBullet(){
         allowFire = false;
-            GameObject newBullet = Instantiate(bullet,transform.GetChild(1).transform.position,transform.GetChild(1).transform.rotation) as GameObject;
+        for(int i=0;i<numBullets;i++){
+          GameObject newBullet = Instantiate(bullet,transform.GetChild(i).transform.position,transform.GetChild(i).transform.rotation) as GameObject;
             newBullet.SendMessage("assignDamage",bulletDamage);
             newBullet.SendMessage("assignSpeed",bulletSpeed);
-            yield return new WaitForSeconds(fireRate);
+        }
+          yield return new WaitForSeconds(fireRate);    
             allowFire = true;
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - EnemyBullet
   - PlayerWeapon
   - MainCanvas
+  - Sentry
   layers:
   - Default
   - TransparentFX

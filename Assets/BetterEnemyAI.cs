@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+public class BetterEnemyAI : MonoBehaviour
 {
     private GameObject player;
     public Stats stats;
@@ -27,7 +27,6 @@ public class EnemyAI : MonoBehaviour
     {
         if(allowTracking){
         StartCoroutine(waitToTrack());
-        rb.velocity = transform.right*stats.movementSpeed;  
         }  
         if(player==null&&!cantMove){
             rb.velocity = new Vector2(0,0);
@@ -62,7 +61,16 @@ public class EnemyAI : MonoBehaviour
         Vector3 currentPosition = mainCamera.WorldToScreenPoint(transform.localPosition);
         Vector2 offset = new Vector2(playerPosition.x-currentPosition.x,playerPosition.y-currentPosition.y);
         float angle = Mathf.Atan2(offset.y,offset.x) *Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f,0f,angle);
+        float bestRotation = 0.0f;
+        float bestDotProduct =-2f;
+        for(float i =0f;i<360f;i+=45f){
+            if(Vector3.Dot(new Vector3(0f,0f,angle),new Vector3(0f,0f,i))>bestDotProduct){
+                bestDotProduct = Vector3.Dot(new Vector3(0f,0f,angle),new Vector3(0f,0f,i));
+                bestRotation = i;
+            }
+        }
+        transform.rotation = Quaternion.Euler(0f,0f,bestRotation);
+        rb.velocity = transform.right*stats.movementSpeed;  
         yield return new WaitForSeconds(reactionTime/1000.0f);
         allowTracking=true;
         }
