@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyShooting : MonoBehaviour
 {
     public int bulletDamage;
+    public int deathTime;
     public float bulletSpeed;
     public GameObject bullet;
     public int numBullets;
@@ -25,6 +26,9 @@ public class EnemyShooting : MonoBehaviour
           GameObject newBullet = Instantiate(bullet,transform.GetChild(i).transform.position,transform.GetChild(i).transform.rotation) as GameObject;
             newBullet.SendMessage("assignDamage",bulletDamage);
             newBullet.SendMessage("assignSpeed",bulletSpeed);
+            if(deathTime!=0){
+              newBullet.SendMessage("assignDeathTime",deathTime);
+            }
         }
           yield return new WaitForSeconds(fireRate);    
             allowFire = true;

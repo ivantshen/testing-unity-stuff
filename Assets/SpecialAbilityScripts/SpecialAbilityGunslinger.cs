@@ -12,7 +12,7 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     private bool allowSpecialLengthDecrease = true;
     private GameObject abilityBar;
     // Update is called once per frame
-    void Start(){
+    void Awake(){
         transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
         abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
         abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
@@ -33,11 +33,8 @@ public class SpecialAbilityGunslinger : MonoBehaviour
         }
         if(currentSpecialCD==0&&Input.GetKeyDown("space")){
             transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = true;
-            GameObject[] weapons = GameObject.FindGameObjectsWithTag("PlayerWeapon");
-            foreach (GameObject currentWeapon in weapons)
-            {
-              currentWeapon.GetComponent<WeaponShooting>().fireRate/=2.0f;  
-            }
+              transform.GetChild(0).gameObject.GetComponent<WeaponShooting>().fireRate/=2.0f;  
+               transform.GetChild(1).gameObject.GetComponent<WeaponShooting>().fireRate/=2.0f;  
             GetComponent<Stats>().movementSpeed*=1.5f;
             currentSpecialLength+=specialLength;
             currentSpecialCD+=specialCD+specialLength;
@@ -56,11 +53,8 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     currentSpecialLength--;  
     if(currentSpecialLength==0){
         transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
-        GameObject[] weapons = GameObject.FindGameObjectsWithTag("PlayerWeapon");
-            foreach (GameObject currentWeapon in weapons)
-        {
-              currentWeapon.GetComponent<WeaponShooting>().fireRate*=2.0f;  
-        }
+         transform.GetChild(0).gameObject.GetComponent<WeaponShooting>().fireRate*=2.0f;  
+               transform.GetChild(1).gameObject.GetComponent<WeaponShooting>().fireRate*=2.0f;  
         GetComponent<Stats>().movementSpeed/=1.5f;
     }
     allowSpecialLengthDecrease = true;

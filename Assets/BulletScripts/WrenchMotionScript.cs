@@ -42,7 +42,7 @@ StartCoroutine(deathTimeCountDown());
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag!="Player"){
-        if (other.gameObject.tag=="Enemy"){
+        if (other.gameObject.tag=="Enemy"||other.gameObject.tag=="Boss"){
             other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
         }
         if(other.gameObject.tag!="PlayerBullet"&&other.gameObject.tag!="EnemyBullet"){

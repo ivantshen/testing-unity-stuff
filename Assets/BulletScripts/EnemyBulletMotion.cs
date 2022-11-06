@@ -7,7 +7,7 @@ public class EnemyBulletMotion : MonoBehaviour
     public Rigidbody2D rb;
     private float bulletSpeed;
     private int bulletDamage;
-    private int deathTime =8;
+    public int deathTime =8;
     private bool allowDeathTimeCD = true;
     void Start(){
         Physics2D.IgnoreLayerCollision(8,6,true);
@@ -29,6 +29,9 @@ public class EnemyBulletMotion : MonoBehaviour
         }
         
     }
+    void assignDeathTime(int death){
+        deathTime = death;
+    }
     void assignDamage(int dmg){
         bulletDamage = dmg;
     }
@@ -42,7 +45,7 @@ public class EnemyBulletMotion : MonoBehaviour
         allowDeathTimeCD = true;
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag!="Enemy"){
+        if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
         if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"){
              other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage); 
         }

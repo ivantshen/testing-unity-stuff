@@ -210,10 +210,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 15
+  deathTime: 3
   bulletSpeed: 1.2
   bullet: {fileID: 1690153903338567243, guid: b7f9dd74d007f2b499d45dd686b62e1b, type: 3}
   numBullets: 6
-  fireRate: 0.7
+  fireRate: 0.3
 --- !u!114 &8101917305814390383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6b7393c51cbfc4e8d8899e21550f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 1.2
+  spinSpeed: 1.5
   duration: 120
 --- !u!212 &6491547729595591522
 SpriteRenderer:

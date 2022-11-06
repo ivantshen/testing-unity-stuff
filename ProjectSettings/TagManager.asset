@@ -5,13 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameBarrier
-  - GameBarrierGround
   - Enemy
   - PlayerBullet
   - EnemyBullet
   - PlayerWeapon
   - MainCanvas
   - Sentry
+  - Boss
   layers:
   - Default
   - TransparentFX
