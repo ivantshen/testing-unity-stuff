@@ -9,6 +9,7 @@ public class EnemyShooting : MonoBehaviour
     public float bulletSpeed;
     public GameObject bullet;
     public int numBullets;
+    public float delayBetweenBullets =0f;
     public float fireRate;
     private bool allowFire = true;
 
@@ -29,6 +30,7 @@ public class EnemyShooting : MonoBehaviour
             if(deathTime!=0){
               newBullet.SendMessage("assignDeathTime",deathTime);
             }
+            yield return new WaitForSeconds(delayBetweenBullets);
         }
           yield return new WaitForSeconds(fireRate);    
             allowFire = true;

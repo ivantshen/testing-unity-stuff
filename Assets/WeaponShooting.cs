@@ -28,7 +28,7 @@ public class WeaponShooting : MonoBehaviour
         if(bulletSpeed<=10){
          ScreenShake.Instance.ShakeCamera(2f,fireRate/1.5f);   
         }else{
-            ScreenShake.Instance.ShakeCamera(bulletSpeed/4f,fireRate/3f);   
+            ScreenShake.Instance.ShakeCamera(bulletSpeed/5f,fireRate/4f);   
         }
          
             

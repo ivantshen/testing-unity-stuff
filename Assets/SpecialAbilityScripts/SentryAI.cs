@@ -39,8 +39,9 @@ public class SentryAI : MonoBehaviour
         allowTracking=false;
         Vector3 position = transform.position;
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject boss = GameObject.FindWithTag("Boss");
         float distance = Mathf.Infinity;
-        if(allEnemies.Length!=0){
+        if(allEnemies.Length!=0||boss!=null){
         foreach (GameObject currentEnemy in allEnemies){
             Vector3 diff = currentEnemy.transform.position - position;
             float currentDistance = diff.sqrMagnitude;
@@ -48,6 +49,12 @@ public class SentryAI : MonoBehaviour
                 enemy = currentEnemy;
                 distance = currentDistance;
             }
+        }
+        Vector3 bossPos = boss.transform.position-position;
+        float bossDistance = bossPos.sqrMagnitude;
+        if(bossDistance<distance){
+            enemy = boss;
+            distance = bossDistance;
         }
         Vector3 enemyPosition = mainCamera.WorldToScreenPoint(enemy.transform.localPosition);
         Vector3 currentPosition = mainCamera.WorldToScreenPoint(transform.localPosition);

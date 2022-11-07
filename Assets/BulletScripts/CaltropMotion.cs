@@ -74,19 +74,14 @@ public class CaltropMotion : MonoBehaviour
         thisSpriteRenderer.color = Color.red;
         if(other){
             if(other.gameObject.tag=="Boss"){
-                other.gameObject.GetComponent<Stats>().movementSpeed /= 1.5f;  
+                other.gameObject.GetComponent<Stats>().speedChangePercent(-0.1f,0.55f);  
             }else{
-            other.gameObject.GetComponent<Stats>().movementSpeed /= 45.0f;    
+            other.gameObject.GetComponent<Stats>().speedChangePercent(-0.5f,0.55f);    
             }
             bulletSpeed*=0.25f;
         }
         yield return new WaitForSeconds(0.55f);
         if(other){
-         if(other.gameObject.tag=="Boss"){
-                other.gameObject.GetComponent<Stats>().movementSpeed *= 1.5f;  
-            }else{
-            other.gameObject.GetComponent<Stats>().movementSpeed *= 45.0f;    
-            }
          other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
         }
         thisSpriteRenderer.color = new Color(0.6f,0.6f,0.6f);
