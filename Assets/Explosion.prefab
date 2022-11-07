@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7984148506342236586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FP1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,9 +42,10 @@ GameObject:
   - component: {fileID: 6701946976998733264}
   - component: {fileID: 1130695893829717967}
   - component: {fileID: 8156978955776487271}
-  m_Layer: 0
+  - component: {fileID: -2713881089628444855}
+  m_Layer: 6
   m_Name: Explosion
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeTillDeath: 1
+--- !u!114 &-2713881089628444855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706721472244548582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ebdd08eaa15f747bbbbebc4c28692a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitude: 12
+  duration: 1.25

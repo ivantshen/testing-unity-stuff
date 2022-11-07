@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missile: {fileID: 1706721472244548582, guid: 075534d9c457a7741a4a7486b59336bd, type: 3}
-  timeToWait: 2.5
+  timeToWait: 1.75
   warningSlider: {fileID: 5581809445886032190}
   updateFrequency: 0.01
 --- !u!114 &5581809445886032190

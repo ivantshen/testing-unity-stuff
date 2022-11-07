@@ -6,6 +6,7 @@ public class NathanYuAI : MonoBehaviour
 { 
     public GameObject NathanYuHealthBar;
     public GameObject NathanYuSpeech;
+    public GameObject teleportWarning;
     private GameObject instantiatedHealthBar;
     // 0 = spin emitter 1 and 2 = split up map 3 = spitball 4 = explosion
     public GameObject[] moves;
@@ -27,7 +28,7 @@ public class NathanYuAI : MonoBehaviour
     void Start()
     {
         mainCam = Camera.main;
-        rb.gravityScale = 10f;
+        rb.gravityScale = 8f;
         stats.invincible = true;
         player = GameObject.FindWithTag("Player");
     }
@@ -62,7 +63,7 @@ public class NathanYuAI : MonoBehaviour
         GameObject newSpitBall =Instantiate(moves[3],transform.GetChild(0).transform.position,transform.GetChild(0).transform.rotation);
         newSpitBall.SendMessage("assignDamage",15);
         newSpitBall.SendMessage("assignSpeed",spitSpeed);
-        yield return new WaitForSeconds(.8f);
+        yield return new WaitForSeconds(.85f);
         bossSpitting = true;
     }
     IEnumerator waitToTrack(){
@@ -96,14 +97,16 @@ public class NathanYuAI : MonoBehaviour
         }else if(move1Selection==2){
             phase1DivideMap();
             stopSpitting = false;
-            spitSpeed = 3.45f;
+            spitSpeed = 3.35f;
+            Instantiate(teleportWarning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            yield return new WaitForSeconds(0.85f);
             transform.position = new Vector2(0,0);
         }else{
             phase1ExplosionPlacement();
             bossChasing = true;
             stopSpitting = false;
-            stats.speedChangePercent(-0.2f,9.5f);
-            spitSpeed = 4.25f;
+            stats.speedChangePercent(-0.25f,9.5f);
+            spitSpeed = 4.15f;
         }
         allowCollisionDamage = true;
         yield return new WaitForSeconds(10);
@@ -116,13 +119,16 @@ public class NathanYuAI : MonoBehaviour
         }else if(move2Selection==2){
             phase1DivideMap();
             stopSpitting = false;
-            spitSpeed = 3.45f;
+            spitSpeed = 3.35f;
+            Instantiate(teleportWarning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            yield return new WaitForSeconds(0.85f);
             transform.position = new Vector2(0,0);
+            
         }else{
             phase1ExplosionPlacement();
             bossChasing = true;
-            spitSpeed = 4.25f;
-            stats.speedChangePercent(-0.2f,9.5f);
+            spitSpeed = 4.15f;
+            stats.speedChangePercent(-0.25f,9.5f);
             stopSpitting = false;
         }
         allowCollisionDamage = true;

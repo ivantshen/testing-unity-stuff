@@ -1213,11 +1213,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NathanYuHealthBar: {fileID: 435107819347554217, guid: 4fba769fb9f63f346897b01cf486f5b1, type: 3}
   NathanYuSpeech: {fileID: 6166628412357958612, guid: 854dbd3b4ddab8f439a6f1f4ca107323, type: 3}
+  teleportWarning: {fileID: 2776880281210517119, guid: 36ad4cb9ed2fb094093b14d2a5a195b0, type: 3}
   moves:
   - {fileID: 3732660569649356712, guid: e47726bd3dd78044a89654a321adde25, type: 3}
-  - {fileID: 6051701557025717711, guid: 55538e04d457dda47b1f7b299be7a52f, type: 3}
-  - {fileID: 1902661354836679827, guid: b18a62375c795704f911c84b4d7136fd, type: 3}
-  - {fileID: 7146706096001496067, guid: ed5fca3fd81983d4681609b4e616f6ad, type: 3}
+  - {fileID: 4585802798728974552, guid: 55538e04d457dda47b1f7b299be7a52f, type: 3}
+  - {fileID: 2152411267095599641, guid: b18a62375c795704f911c84b4d7136fd, type: 3}
+  - {fileID: 1476756805363136016, guid: ed5fca3fd81983d4681609b4e616f6ad, type: 3}
   - {fileID: 5581809445886032161, guid: af258309f63be7a4aacf77c5588453fb, type: 3}
   stats: {fileID: 1791042502}
   rb: {fileID: 1791042501}
