@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialCD: 12
   sentry: {fileID: 8431701814973954274, guid: d954b4f68138f9e4fa0525cc2e84751f, type: 3}
-  sentryDamage: 8
+  sentryDamage: 12
   sentryFireRate: 0.35
   sentryHealth: 90
   sentryReactionTime: 100

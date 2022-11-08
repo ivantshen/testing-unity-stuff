@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10000
   health: 10000
-  movementSpeed: 3.35
+  movementSpeed: 3.4
   invincible: 0
 --- !u!212 &1791042503
 SpriteRenderer:
