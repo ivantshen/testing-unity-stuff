@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 8101917305814390383}
   - component: {fileID: 6491547729595591522}
   - component: {fileID: 4557351161790825562}
-  - component: {fileID: 3571869688605047756}
+  - component: {fileID: 6292305038494785837}
   m_Layer: 6
   m_Name: SpinningBulletEmitter
   m_TagString: Enemy
@@ -294,11 +294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd74c07f89c1f9944b49c62ab0c5c304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 80
-  health: 80
+  maxHealth: 40
+  health: 40
   movementSpeed: 0
   invincible: 0
---- !u!58 &3571869688605047756
+--- !u!58 &6292305038494785837
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -6,7 +6,7 @@ public class NathanYuAI : MonoBehaviour
 { 
     public GameObject NathanYuHealthBar;
     public GameObject NathanYuSpeech;
-    public GameObject teleportWarning;
+    public GameObject warning;
     private GameObject instantiatedHealthBar;
     // 0 = spin emitter 1 and 2 = split up map 3 = spitball 4 = explosion
     public GameObject[] moves;
@@ -95,17 +95,17 @@ public class NathanYuAI : MonoBehaviour
             phase1SpinnerPlacement();
             bossChasing = true;
         }else if(move1Selection==2){
-            phase1DivideMap();
-            stopSpitting = false;
+           phase1DivideMap();
             spitSpeed = 3.35f;
-            Instantiate(teleportWarning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(warning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             yield return new WaitForSeconds(0.85f);
+            stopSpitting = false;
             transform.position = new Vector2(0,0);
         }else{
             phase1ExplosionPlacement();
             bossChasing = true;
             stopSpitting = false;
-            stats.speedChangePercent(-0.25f,9.5f);
+            stats.speedChangePercent(-0.15f,9.5f);
             spitSpeed = 4.15f;
         }
         allowCollisionDamage = true;
@@ -118,17 +118,17 @@ public class NathanYuAI : MonoBehaviour
             bossChasing = true;
         }else if(move2Selection==2){
             phase1DivideMap();
-            stopSpitting = false;
             spitSpeed = 3.35f;
-            Instantiate(teleportWarning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(warning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             yield return new WaitForSeconds(0.85f);
+            stopSpitting = false;
             transform.position = new Vector2(0,0);
             
         }else{
             phase1ExplosionPlacement();
             bossChasing = true;
             spitSpeed = 4.15f;
-            stats.speedChangePercent(-0.25f,9.5f);
+            stats.speedChangePercent(-0.15f,9.5f);
             stopSpitting = false;
         }
         allowCollisionDamage = true;
@@ -145,15 +145,15 @@ public class NathanYuAI : MonoBehaviour
         if(TorF){
         stats.changeDamageTakenMultiplier(0.5f);
         //Out of bounds check
-        if(transform.position.y<-8.5f){
-        transform.position = new Vector3(transform.position.x,-8.5f,0f);
-        }else if(transform.position.y>8.5){
-        transform.position = new Vector3(transform.position.x,8.5f,0f);
+        if(transform.position.y<-8.25f){
+        transform.position = new Vector3(transform.position.x,-8.25f,0f);
+        }else if(transform.position.y>8.25){
+        transform.position = new Vector3(transform.position.x,8.25f,0f);
         }
-        if(transform.position.x>18.3){
-        transform.position = new Vector3(18.3f,transform.position.y,0f);
-        }else if(transform.position.x<-18.3){
-          transform.position = new Vector3(-18.3f,transform.position.y,0f);  
+        if(transform.position.x>18.15){
+        transform.position = new Vector3(18.15f,transform.position.y,0f);
+        }else if(transform.position.x<-18.15){
+          transform.position = new Vector3(-18.15f,transform.position.y,0f);  
         }
         rb.gravityScale+=3;   
         stopTracking = true;

@@ -174,7 +174,7 @@ MonoBehaviour:
   sentry: {fileID: 8431701814973954274, guid: d954b4f68138f9e4fa0525cc2e84751f, type: 3}
   sentryDamage: 8
   sentryFireRate: 0.35
-  sentryHealth: 125
+  sentryHealth: 90
   sentryReactionTime: 100
   sentryBulletSpeed: 8
   sentryLifeDuration: 28
@@ -207,6 +207,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   movementSpeed: 3.3
+  invincible: 0
 --- !u!1 &5033919995742730289
 GameObject:
   m_ObjectHideFlags: 0
