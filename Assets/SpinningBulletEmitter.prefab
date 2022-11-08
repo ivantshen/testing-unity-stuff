@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 267115616115153732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403745880644328639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 252385851068898830}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7764061039623651497}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2387190387268126432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,6 +214,7 @@ MonoBehaviour:
   bulletSpeed: 1.4
   bullet: {fileID: 1690153903338567243, guid: b7f9dd74d007f2b499d45dd686b62e1b, type: 3}
   numBullets: 6
+  delayBetweenBullets: 0
   fireRate: 0.3
 --- !u!114 &8101917305814390383
 MonoBehaviour:
@@ -322,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6716650994954139641}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirePoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
