@@ -7,10 +7,12 @@ public class WeaponRotation : MonoBehaviour
     private Camera mainCamera;
     public GameObject player;
     public float extraDegreesToRotate;
+    public bool allowRotate = true;
     void Start(){
         mainCamera = Camera.main;
     }
     private void FixedUpdate() {
+        if(allowRotate){
         Vector3 difference = mainCamera.ScreenToWorldPoint(Input.mousePosition)-transform.position;
         difference.Normalize();
         float rotationZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
@@ -22,6 +24,8 @@ public class WeaponRotation : MonoBehaviour
             }else if(player.transform.eulerAngles.y==180){
                 transform.localRotation = Quaternion.Euler(180,180,-rotationZ+extraDegreesToRotate);
             }
+        }    
         }
+        
     }
 }

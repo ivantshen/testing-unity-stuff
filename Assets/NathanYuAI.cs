@@ -223,7 +223,7 @@ public class NathanYuAI : MonoBehaviour
         stats.invincible = false;
         allowMoves = true;
     }
-    private void OnTriggerEnter2D(Collider2D other){
+    private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag=="GameBarrier"){
             ScreenShake.Instance.ShakeCamera(rb.gravityScale,0.5f);
             if(rb.gravityScale>0){
@@ -237,13 +237,13 @@ public class NathanYuAI : MonoBehaviour
             }
         }
     }
-    IEnumerator collisionDamage(Collider2D other){
+    IEnumerator collisionDamage(Collision2D other){
         allowCollisionDamage = false;
     other.gameObject.GetComponent<Stats>().decreaseHealth(30);   
     yield return new WaitForSeconds(0.5f);
     allowCollisionDamage = true;
     }
-    private void OnTriggerStay2D(Collider2D other){
+    private void OnCollisionStay2D(Collision2D other){
         if(other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"){
             if(allowCollisionDamage){
              StartCoroutine(collisionDamage(other));

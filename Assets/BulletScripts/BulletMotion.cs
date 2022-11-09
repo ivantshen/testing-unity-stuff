@@ -5,9 +5,10 @@ using UnityEngine;
 public class BulletMotion : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public bool passThroughEnemies = false;
     private float bulletSpeed;
     private int bulletDamage;
-    private int deathTime =8;
+    private int deathTime =9;
     private bool allowDeathTimeCD = true;
     void Start()
     {
@@ -47,7 +48,10 @@ public class BulletMotion : MonoBehaviour
             other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
         }
         if(other.gameObject.tag!="PlayerBullet"&&other.gameObject.tag!="EnemyBullet"){
-          Destroy(gameObject);  
+            if(!passThroughEnemies||other.gameObject.tag=="GameBarrier"){
+            Destroy(gameObject);      
+            }
+          
         }
         }
         
