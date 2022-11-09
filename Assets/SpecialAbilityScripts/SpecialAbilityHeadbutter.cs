@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpecialAbilityDasher : MonoBehaviour
+public class SpecialAbilityHeadbutter : MonoBehaviour
 {
     public int dashDamage;
     public Stats stats;
@@ -18,8 +18,8 @@ public class SpecialAbilityDasher : MonoBehaviour
     private Vector2 currentDashPath;
     // Update is called once per frame
     void Start(){
-        if(dashDuration<.25f){
-            dashDuration = 0.25f;
+        if(dashDuration<.35f){
+            dashDuration = 0.35f;
         }
         abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
         abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
@@ -44,9 +44,9 @@ public class SpecialAbilityDasher : MonoBehaviour
         currentSpecialCD+=specialCD;
             currentDashPath = transform.GetChild(0).transform.right;
         rb.velocity = currentDashPath*acceleration;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.35f);
         stats.invincible = false;
-        yield return new WaitForSeconds(dashDuration-0.25f);
+        yield return new WaitForSeconds(dashDuration-0.35f);
         isDashing = false;
         rb.velocity = new Vector2(0,0);
         pm.allowMovement = true;
