@@ -48,7 +48,7 @@ public class EnemySlowingBulletMotion : MonoBehaviour
         if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
         if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"){
              other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage); 
-             other.gameObject.GetComponent<Stats>().speedChangePercent(-0.35f,2.25f);
+             other.gameObject.GetComponent<Stats>().speedChangePercent(-0.25f,1.35f);
         }
         }
 
