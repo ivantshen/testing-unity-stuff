@@ -27,7 +27,7 @@ public class MapDividerLaserShooting : MonoBehaviour
             }
             allowWarningLaser=true;
         }
-        ignoreRaycastLayers = LayerMask.GetMask("Enemies")|LayerMask.GetMask("EnemyBullets");
+        ignoreRaycastLayers = LayerMask.GetMask("Enemies")|LayerMask.GetMask("EnemyBullets")|LayerMask.GetMask("PlayerBullets");
     }
     // Update is called once per frame
     void FixedUpdate()
