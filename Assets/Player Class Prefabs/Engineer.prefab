@@ -145,7 +145,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480024628631355715}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -156,7 +156,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &480024628631356081
 MonoBehaviour:
@@ -170,11 +170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f98efbd154d4b4f93f836601e27a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialCD: 12
-  sentry: {fileID: 8431701814973954274, guid: d954b4f68138f9e4fa0525cc2e84751f, type: 3}
-  sentryDamage: 12
-  sentryFireRate: 0.35
-  sentryHealth: 90
+  specialCD: 16
+  sentry: {fileID: 2515335651765278034, guid: d954b4f68138f9e4fa0525cc2e84751f, type: 3}
+  barricade: {fileID: 4685829572630344380, guid: 54e4d4e290a27794290a59d8403838d8, type: 3}
+  sentryDamage: 14
+  sentryFireRate: 0.4
+  sentryHealth: 120
   sentryReactionTime: 100
   sentryBulletSpeed: 8
   sentryLifeDuration: 28
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 480024628631355727}
   stats: {fileID: 480024628631355725}
+  allowMovement: 1
 --- !u!114 &480024628631355725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd74c07f89c1f9944b49c62ab0c5c304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 100
+  maxHealth: 120
+  health: 120
   movementSpeed: 3.3
   invincible: 0
 --- !u!1 &5033919995742730289
@@ -341,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 480024628631355715}
   extraDegreesToRotate: 0
+  allowRotate: 1
 --- !u!114 &8166476573077142357
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,11 +10,14 @@ public class WeaponShooting : MonoBehaviour
     public float fireRate;
     public int numBarrels;
     private bool allowFire = true;
-
+    private bool autoFiring = false;
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse0)&&allowFire){
+        if(Input.GetKeyDown(KeyCode.I)){
+            autoFiring = !autoFiring;
+        }
+        if((Input.GetKey(KeyCode.Mouse0)||autoFiring)&&allowFire){
             StartCoroutine(generateBullet());
         }
     }

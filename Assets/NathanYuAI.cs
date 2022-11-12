@@ -35,6 +35,7 @@ public class NathanYuAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics2D.IgnoreLayerCollision(6,9);
         firepoint1 = transform.GetChild(0).transform;
         mainCam = Camera.main;
         rb.gravityScale = 8f;
@@ -165,15 +166,15 @@ public class NathanYuAI : MonoBehaviour
         if(TorF){
         stats.changeDamageTakenMultiplier(0.5f);
         //Out of bounds check
-        if(transform.position.y<-8.15f){
-        transform.position = new Vector3(transform.position.x,-8.15f,0f);
-        }else if(transform.position.y>8.15){
-        transform.position = new Vector3(transform.position.x,8.15f,0f);
+        if(transform.position.y<-7f){
+        transform.position = new Vector3(transform.position.x,-7f,0f);
+        }else if(transform.position.y>7){
+        transform.position = new Vector3(transform.position.x,7f,0f);
         }
-        if(transform.position.x>18f){
-        transform.position = new Vector3(18f,transform.position.y,0f);
-        }else if(transform.position.x<-18f){
-          transform.position = new Vector3(-18f,transform.position.y,0f);  
+        if(transform.position.x>16.5f){
+        transform.position = new Vector3(16.5f,transform.position.y,0f);
+        }else if(transform.position.x<-16.5f){
+          transform.position = new Vector3(-16.5f,transform.position.y,0f);  
         }
         rb.gravityScale+=3;   
         stopTracking = true;
@@ -211,15 +212,16 @@ public class NathanYuAI : MonoBehaviour
         int amountOfPlacements = 7;
         GameObject explosion = moves[4];
         if(player!=null){
-        Instantiate(explosion,mainCam.WorldToScreenPoint(player.transform.position),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+        Instantiate(explosion,mainCam.WorldToScreenPoint(player.transform.position+new Vector3(Random.Range(-1.2f,1.2f),Random.Range(-1.2f,1.2f),0f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
         amountOfPlacements--;    
         }
         GameObject[] allSentries = GameObject.FindGameObjectsWithTag("Sentry");
         foreach (GameObject currentSentry in allSentries)
         {
             if(amountOfPlacements>0){
-                Instantiate(explosion,mainCam.WorldToScreenPoint(currentSentry.transform.position),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
-            amountOfPlacements--;
+            Instantiate(explosion,mainCam.WorldToScreenPoint(currentSentry.transform.position+new Vector3(Random.Range(-0.8f,0.8f),Random.Range(-0.8f,0.8f),0f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(explosion,mainCam.WorldToScreenPoint(currentSentry.transform.position+new Vector3(Random.Range(-0.8f,0.8f),Random.Range(-0.8f,0.8f),0f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            amountOfPlacements-=2;
             }
         }
         while(amountOfPlacements>0){

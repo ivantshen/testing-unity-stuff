@@ -46,7 +46,7 @@ public class EnemyBulletMotion : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
-        if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"){
+        if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
              other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage); 
         }
         }

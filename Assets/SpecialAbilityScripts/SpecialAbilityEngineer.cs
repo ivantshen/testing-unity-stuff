@@ -6,6 +6,7 @@ public class SpecialAbilityEngineer : MonoBehaviour
 {
     public int specialCD;
     public GameObject sentry;
+    public GameObject barricade;
     public int sentryDamage;
     public float sentryFireRate;
     public int sentryHealth;
@@ -29,7 +30,8 @@ public class SpecialAbilityEngineer : MonoBehaviour
         }
         if(Input.GetKeyDown("space")&&currentSpecialCD==0){
             Transform weapon = transform.Find("Weapon").transform;
-            GameObject newSentry = Instantiate(sentry,weapon.GetChild(0).transform.position,Quaternion.identity) as GameObject;
+            Instantiate(barricade,weapon.GetChild(0).transform.position,weapon.rotation);
+            GameObject newSentry = Instantiate(sentry,weapon.GetChild(0).transform.position,weapon.rotation) as GameObject;
             newSentry.SendMessage("assignDamage",sentryDamage);
             newSentry.SendMessage("assignFireRate",sentryFireRate);   
             newSentry.SendMessage("assignHealth",sentryHealth);

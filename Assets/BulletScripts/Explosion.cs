@@ -7,7 +7,7 @@ public class Explosion : MonoBehaviour
     public Rigidbody2D rb;
     private float bulletSpeed;
     private int bulletDamage;
-    public float deathTime = 0.25f;
+    public float deathTime = 0.45f;
     void Start(){
         Physics2D.IgnoreLayerCollision(8,6,true);
         Physics2D.IgnoreLayerCollision(8,7,true);
@@ -30,11 +30,12 @@ public class Explosion : MonoBehaviour
     }
     void assignDamage(int dmg){
         bulletDamage = dmg;
+        
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
-        if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"){
-             other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage); 
+        if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
+             other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
         }
         }
         }

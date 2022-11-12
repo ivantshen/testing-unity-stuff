@@ -53,7 +53,7 @@ public class EnemyLaserMotion : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
-        if ((other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry")&&allowDamage){
+        if ((other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade")&&allowDamage){
              StartCoroutine(damagePlayer(other));
         }
         }

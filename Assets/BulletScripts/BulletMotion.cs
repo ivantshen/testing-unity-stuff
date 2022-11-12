@@ -47,7 +47,7 @@ public class BulletMotion : MonoBehaviour
             if (other.gameObject.tag=="Enemy"||other.gameObject.tag=="Boss"){
             other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
         }
-        if(other.gameObject.tag!="PlayerBullet"&&other.gameObject.tag!="EnemyBullet"){
+        if(other.gameObject.tag!="PlayerBullet"&&other.gameObject.tag!="EnemyBullet"&&other.gameObject.tag!="PlayerBarricade"){
             if(!passThroughEnemies||other.gameObject.tag=="GameBarrier"){
             Destroy(gameObject);      
             }

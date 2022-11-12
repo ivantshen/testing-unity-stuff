@@ -114,7 +114,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3269228990527056223}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &3269228990527056193
 MonoBehaviour:
@@ -158,6 +158,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   movementSpeed: 3.3
+  invincible: 0
 --- !u!114 &1330993414596041469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3269228990527056211}
   stats: {fileID: 3017440428608777631}
+  allowMovement: 1
 --- !u!1 &3269228991167814857
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3269228990527056223}
   extraDegreesToRotate: 0
+  allowRotate: 1
 --- !u!114 &6531035871633412937
 MonoBehaviour:
   m_ObjectHideFlags: 0

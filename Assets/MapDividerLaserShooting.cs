@@ -81,7 +81,7 @@ public class MapDividerLaserShooting : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position,firePoint.right,100f,~ignoreRaycastLayers.value);
         LineRenderer lineRenderer = transform.GetChild(i+4).GetComponent<LineRenderer>();
         if(hit){
-            if(hit.collider.gameObject.tag=="Player"||hit.collider.gameObject.tag=="Sentry"){
+            if(hit.collider.gameObject.tag=="Player"||hit.collider.gameObject.tag=="Sentry"||hit.collider.gameObject.tag=="PlayerBarricade"){
                 hit.collider.gameObject.GetComponent<Stats>().decreaseHealth(laserDamage);
                 Instantiate(laserEndpoint,hit.point,Quaternion.identity);
                 lineRenderer.SetPosition(0,firePoint.position);

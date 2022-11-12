@@ -12,6 +12,7 @@ public class WeaponSlashing : MonoBehaviour
     public int slashDamage;
     private bool resetPosition;
     private LayerMask targetLayer;
+    private bool autoFiring = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +27,14 @@ public class WeaponSlashing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.I)){
+            autoFiring = !autoFiring;
+        }
         if(timeBetweenAttacks<=0){
             if(anim){
               anim.Play("idle",PlayMode.StopAll);  
             }
-            if(Input.GetKey(KeyCode.Mouse0)){
+            if(Input.GetKey(KeyCode.Mouse0)||autoFiring){
                 ScreenShake.Instance.ShakeCamera(3f,0.215f);
                 Collider2D[] enemiesToDmg = Physics2D.OverlapCircleAll(firePoint.position,attackRange,targetLayer);
                 foreach (Collider2D enemy in enemiesToDmg)

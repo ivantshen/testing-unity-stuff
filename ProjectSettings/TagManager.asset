@@ -12,6 +12,7 @@ TagManager:
   - MainCanvas
   - Sentry
   - Boss
+  - PlayerBarricade
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - PlayerBullets
   - EnemyBullets
   - GameBarriers
-  - 
+  - Ground
   - 
   - 
   - 

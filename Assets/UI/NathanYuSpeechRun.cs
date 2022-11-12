@@ -17,7 +17,7 @@ public class NathanYuSpeechRun : MonoBehaviour
         StartCoroutine(currentTextCoroutine);
     }
     void Update(){
-        if(nathanStats.health>9500){
+        if(nathanStats.health>9500&&!hasPhaseChanged){
         if(currentText==1&&!currentlyTalking){
           currentTextCoroutine=displayText("Even if you best me, you still must fell the mighty Andrew Huang.");
           StartCoroutine(currentTextCoroutine);  
