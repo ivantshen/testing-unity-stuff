@@ -7,11 +7,14 @@ public class NathanYuAI : MonoBehaviour
     public GameObject NathanYuHealthBar;
     public GameObject NathanYuSpeech;
     public GameObject warning;
+    public Sprite enragedPhase0;
     private GameObject instantiatedHealthBar;
     // 0 = spin emitter 1 and 2 = split up map 3 = spitball 4 = explosion
     public GameObject[] moves;
     public Stats stats;
     public Rigidbody2D rb;
+    private int currentSizeIncrease =0;
+    private bool enraged = false;
     private bool bossAwake = false;
     private int currentPhase = 0;
     private bool allowMoves = true;
@@ -22,11 +25,17 @@ public class NathanYuAI : MonoBehaviour
     private bool bossSpitting = true;
     private bool stopSpitting = true;
     private float spitSpeed = 0f;
+    private float phase1MoveChainSpeed = 10f;
+    private float phase1StaggerLength =7f;
+    private float spitCD = 0.85f;
+    private Transform firepoint1;
+    private IEnumerator currentCoroutine;
     private Camera mainCam;
     private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        firepoint1 = transform.GetChild(0).transform;
         mainCam = Camera.main;
         rb.gravityScale = 8f;
         stats.invincible = true;
@@ -37,15 +46,25 @@ public class NathanYuAI : MonoBehaviour
     void Update()
     {
         if(bossAwake){
-            if(currentPhase ==0&&allowMoves){
-                StartCoroutine(phase0Transition());
+            if(currentPhase==0&&allowMoves){
+                currentCoroutine = phase0Transition();
+                StartCoroutine(currentCoroutine);
+            }
+            if(currentPhase==0&&stats.health<=9500&&!enraged){
+                enraged = true;
+                phase1StaggerLength -=1f;
+                phase1MoveChainSpeed-=1.5f;
+                spitCD -=0.125f;
+                StopCoroutine(currentCoroutine);
+                StartCoroutine(phase0EnragedTransition());
             }
             if(currentPhase==1){
                 if(allowTracking&&!stopTracking){
                     StartCoroutine(waitToTrack());
                 }
                 if(allowMoves){
-                    StartCoroutine(phase1MoveChaining());
+                    currentCoroutine = phase1MoveChaining();
+                    StartCoroutine(currentCoroutine);
                 }
                 if(bossChasing&&player!=null){
                     float step = stats.movementSpeed *Time.deltaTime;
@@ -60,10 +79,11 @@ public class NathanYuAI : MonoBehaviour
     }
     IEnumerator spit(){
         bossSpitting = false;
-        GameObject newSpitBall =Instantiate(moves[3],transform.GetChild(0).transform.position,transform.GetChild(0).transform.rotation);
+        Quaternion offset = Quaternion.AngleAxis(Random.Range(-15,16), Vector3.forward);
+        GameObject newSpitBall =Instantiate(moves[3],firepoint1.position,firepoint1.rotation*offset);
         newSpitBall.SendMessage("assignDamage",15);
         newSpitBall.SendMessage("assignSpeed",spitSpeed);
-        yield return new WaitForSeconds(.85f);
+        yield return new WaitForSeconds(spitCD);
         bossSpitting = true;
     }
     IEnumerator waitToTrack(){
@@ -109,7 +129,7 @@ public class NathanYuAI : MonoBehaviour
             spitSpeed = 4.15f;
         }
         allowCollisionDamage = true;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(phase1MoveChainSpeed);
         stopSpitting = true;
         bossChasing = false;
         allowCollisionDamage = false;
@@ -132,12 +152,12 @@ public class NathanYuAI : MonoBehaviour
             stopSpitting = false;
         }
         allowCollisionDamage = true;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(phase1MoveChainSpeed);
         stopSpitting = true;
         bossChasing = false;
         allowCollisionDamage = false;
         stagger(true);
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(phase1StaggerLength);
         stagger(false);
         allowMoves = true;
     }
@@ -145,15 +165,15 @@ public class NathanYuAI : MonoBehaviour
         if(TorF){
         stats.changeDamageTakenMultiplier(0.5f);
         //Out of bounds check
-        if(transform.position.y<-8.25f){
-        transform.position = new Vector3(transform.position.x,-8.25f,0f);
-        }else if(transform.position.y>8.25){
-        transform.position = new Vector3(transform.position.x,8.25f,0f);
+        if(transform.position.y<-8.15f){
+        transform.position = new Vector3(transform.position.x,-8.15f,0f);
+        }else if(transform.position.y>8.15){
+        transform.position = new Vector3(transform.position.x,8.15f,0f);
         }
-        if(transform.position.x>18.15){
-        transform.position = new Vector3(18.15f,transform.position.y,0f);
-        }else if(transform.position.x<-18.15){
-          transform.position = new Vector3(-18.15f,transform.position.y,0f);  
+        if(transform.position.x>18f){
+        transform.position = new Vector3(18f,transform.position.y,0f);
+        }else if(transform.position.x<-18f){
+          transform.position = new Vector3(-18f,transform.position.y,0f);  
         }
         rb.gravityScale+=3;   
         stopTracking = true;
@@ -214,13 +234,37 @@ public class NathanYuAI : MonoBehaviour
         yield return new WaitForSeconds(6.5f);
         rb.velocity = new Vector2(0f,0f);
         for(int i=1;i<7;i++){
+            currentSizeIncrease ++;
           transform.localScale += new Vector3(0.5f,0.5f,0f);  
           ScreenShake.Instance.ShakeCamera((2f*i),0.615f);
           yield return new WaitForSeconds(1.25f);
         }
         instantiatedHealthBar.SetActive(true);
         currentPhase++;
-        stats.invincible = false;
+        allowMoves = true;
+    }
+    IEnumerator phase0EnragedTransition(){
+        allowMoves= false;
+        rb.velocity = new Vector2(0f,0f);
+        GetComponent<SpriteRenderer>().sprite = enragedPhase0;
+        Destroy(GetComponent<PolygonCollider2D>());
+        gameObject.AddComponent<PolygonCollider2D>();
+        for(float i=1;i<5;i++){
+            GetComponent<SpriteRenderer>().color = new Color(1f,1f-(0.15f*i),1f-(0.15f*i),1f);
+            ScreenShake.Instance.ShakeCamera(3f,0.615f);
+            yield return new WaitForSeconds(1.25f);
+        }
+        for(int i=currentSizeIncrease+1;i<7;i++){
+          transform.localScale += new Vector3(0.5f,0.5f,0f);  
+          ScreenShake.Instance.ShakeCamera((3f*i),0.615f);
+          yield return new WaitForSeconds(1.25f);
+        }
+        yield return new WaitForSeconds(1.25f);
+        instantiatedHealthBar.SetActive(true);
+        stats.maxHealth = 12000;
+        stats.health = 12000;
+        stats.movementSpeed = 3.55f;
+        currentPhase++;
         allowMoves = true;
     }
     private void OnCollisionEnter2D(Collision2D other){
@@ -234,6 +278,7 @@ public class NathanYuAI : MonoBehaviour
             instantiatedHealthBar = Instantiate(NathanYuHealthBar,new Vector2(960f,960f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             Instantiate(NathanYuSpeech,new Vector2(960f,120f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             bossAwake = true;
+            stats.invincible = false;
             }
         }
     }

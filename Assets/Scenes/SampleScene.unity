@@ -1652,8 +1652,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NathanYuHealthBar: {fileID: 435107819347554217, guid: 4fba769fb9f63f346897b01cf486f5b1, type: 3}
-  NathanYuSpeech: {fileID: 6166628412357958612, guid: 854dbd3b4ddab8f439a6f1f4ca107323, type: 3}
+  NathanYuSpeech: {fileID: 5099430236373945033, guid: 854dbd3b4ddab8f439a6f1f4ca107323, type: 3}
   warning: {fileID: 2776880281210517119, guid: 36ad4cb9ed2fb094093b14d2a5a195b0, type: 3}
+  enragedPhase0: {fileID: 21300000, guid: 0b3398b6d2b8f7c4ab4cb16610ac3cff, type: 3}
   moves:
   - {fileID: 3732660569649356712, guid: e47726bd3dd78044a89654a321adde25, type: 3}
   - {fileID: 4657682754000720517, guid: 55538e04d457dda47b1f7b299be7a52f, type: 3}

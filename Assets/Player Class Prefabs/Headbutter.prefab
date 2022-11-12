@@ -814,7 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722f402863489594ebc85e3fd65f43ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashDamage: 50
+  dashDamage: 75
   stats: {fileID: 8400916435329184638}
   pm: {fileID: 8400916435329184637}
   specialCD: 3
