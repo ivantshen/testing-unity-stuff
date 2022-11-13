@@ -28,6 +28,7 @@ public class NathanYuAI : MonoBehaviour
     private float phase1MoveChainSpeed = 10f;
     private float phase1StaggerLength =7f;
     private float spitCD = 0.85f;
+    private int extraDegTracking = 0;
     private Transform firepoint1;
     private IEnumerator currentCoroutine;
     private Camera mainCam;
@@ -81,7 +82,7 @@ public class NathanYuAI : MonoBehaviour
     IEnumerator spit(){
         bossSpitting = false;
         Quaternion offset = Quaternion.AngleAxis(Random.Range(-15,16), Vector3.forward);
-        GameObject newSpitBall =Instantiate(moves[3],firepoint1.position,firepoint1.rotation*offset);
+        GameObject newSpitBall =Instantiate(moves[3],firepoint1.position,(firepoint1.rotation*offset*Quaternion.AngleAxis(-extraDegTracking,Vector3.forward)));
         newSpitBall.SendMessage("assignDamage",15);
         newSpitBall.SendMessage("assignSpeed",spitSpeed);
         yield return new WaitForSeconds(spitCD);
@@ -93,12 +94,12 @@ public class NathanYuAI : MonoBehaviour
          Vector3 difference = player.transform.position-transform.position;
         difference.Normalize();
         float rotationZ = Mathf.Atan2(difference.y,difference.x)*Mathf.Rad2Deg;
-          transform.rotation = Quaternion.Euler(0f,0f,rotationZ);  
+          transform.rotation = Quaternion.Euler(0f,0f,rotationZ+extraDegTracking);  
         if(rotationZ <-90||rotationZ>90){
             if(player.transform.eulerAngles.y==0){
-                transform.localRotation = Quaternion.Euler(180,0,-rotationZ);
+                transform.localRotation = Quaternion.Euler(180,0,-rotationZ+extraDegTracking);
             }else if(player.transform.eulerAngles.y==180){
-                transform.localRotation = Quaternion.Euler(180,180,-rotationZ);
+                transform.localRotation = Quaternion.Euler(180,180,-rotationZ+extraDegTracking);
             }
         }   
         }
@@ -182,6 +183,7 @@ public class NathanYuAI : MonoBehaviour
 
         }else{
         rb.rotation = 0f;
+        rb.gravityScale=0;
         stats.changeDamageTakenMultiplier(-0.5f);
         stopTracking = false;
         }
@@ -261,11 +263,12 @@ public class NathanYuAI : MonoBehaviour
           ScreenShake.Instance.ShakeCamera((3f*i),0.615f);
           yield return new WaitForSeconds(1.25f);
         }
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(3.25f);
         instantiatedHealthBar.SetActive(true);
         stats.maxHealth = 12000;
         stats.health = 12000;
         stats.movementSpeed = 3.55f;
+        extraDegTracking =25;
         currentPhase++;
         allowMoves = true;
     }
@@ -284,16 +287,20 @@ public class NathanYuAI : MonoBehaviour
             }
         }
     }
-    IEnumerator collisionDamage(Collision2D other){
+    IEnumerator collisionDamage(Collision2D other,int dmg){
         allowCollisionDamage = false;
-    other.gameObject.GetComponent<Stats>().decreaseHealth(30);   
+    other.gameObject.GetComponent<Stats>().decreaseHealth(dmg);   
     yield return new WaitForSeconds(0.5f);
     allowCollisionDamage = true;
     }
     private void OnCollisionStay2D(Collision2D other){
         if(other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"){
             if(allowCollisionDamage){
-             StartCoroutine(collisionDamage(other));
+             StartCoroutine(collisionDamage(other,30));
+            }
+        }else if(other.gameObject.tag=="PlayerBarricade"){
+            if(allowCollisionDamage){
+             StartCoroutine(collisionDamage(other,65));
             }
         }
 

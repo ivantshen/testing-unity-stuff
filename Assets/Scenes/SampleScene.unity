@@ -243,6 +243,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4685829572630344380, guid: 54e4d4e290a27794290a59d8403838d8, type: 3}
     - target: {fileID: 480024628631356081, guid: 8b526f2fb7fa7f3499508f31a544bf6b, type: 3}
+      propertyPath: specialCD
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 480024628631356081, guid: 8b526f2fb7fa7f3499508f31a544bf6b, type: 3}
       propertyPath: sentryHealth
       value: 120
       objectReference: {fileID: 0}
