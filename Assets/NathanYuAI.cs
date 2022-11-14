@@ -243,6 +243,7 @@ public class NathanYuAI : MonoBehaviour
           ScreenShake.Instance.ShakeCamera((2f*i),0.615f);
           yield return new WaitForSeconds(1.25f);
         }
+        yield return new WaitForSeconds(2.25f);
         instantiatedHealthBar.SetActive(true);
         currentPhase++;
         allowMoves = true;
@@ -256,7 +257,7 @@ public class NathanYuAI : MonoBehaviour
         for(float i=1;i<5;i++){
             GetComponent<SpriteRenderer>().color = new Color(1f,1f-(0.15f*i),1f-(0.15f*i),1f);
             ScreenShake.Instance.ShakeCamera(3f,0.615f);
-            yield return new WaitForSeconds(1.25f);
+            yield return new WaitForSeconds(0.35f);
         }
         for(int i=currentSizeIncrease+1;i<7;i++){
           transform.localScale += new Vector3(0.5f,0.5f,0f);  
