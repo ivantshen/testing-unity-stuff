@@ -33,10 +33,17 @@ public class NathanYuAI : MonoBehaviour
     private IEnumerator currentCoroutine;
     private Camera mainCam;
     private GameObject player;
+    private GameObject[] gameBarriers;
     // Start is called before the first frame update
     void Start()
     {
-        Physics2D.IgnoreLayerCollision(6,9);
+        gameBarriers = GameObject.FindGameObjectsWithTag("GameBarrier");
+        foreach (GameObject currentBarrier in gameBarriers)
+        {
+            if(currentBarrier.layer==9){
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(),currentBarrier.GetComponent<Collider2D>());    
+            }
+        }
         firepoint1 = transform.GetChild(0).transform;
         mainCam = Camera.main;
         rb.gravityScale = 8f;
@@ -254,6 +261,12 @@ public class NathanYuAI : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = enragedPhase0;
         Destroy(GetComponent<PolygonCollider2D>());
         gameObject.AddComponent<PolygonCollider2D>();
+        foreach (GameObject currentBarrier in gameBarriers)
+        {
+            if(currentBarrier.layer==9){
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(),currentBarrier.GetComponent<Collider2D>());    
+            }
+        }
         for(float i=1;i<5;i++){
             GetComponent<SpriteRenderer>().color = new Color(1f,1f-(0.15f*i),1f-(0.15f*i),1f);
             ScreenShake.Instance.ShakeCamera(3f,0.615f);
