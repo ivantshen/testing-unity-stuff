@@ -17,13 +17,13 @@ public class MapDividerLaserShooting : MonoBehaviour
     void Start(){
         if(!hasWarningLaser){
             for(int i=0;i<numLasers;i++){
-             transform.GetChild(i+4).GetComponent<LineRenderer>().enabled = true;;  
+             transform.GetChild(i+4).GetComponent<LineRenderer>().enabled = true; 
             }
             allowFire = true;
             stopWarningLaser=true;
         }else{
             for(int i=0;i<numLasers;i++){
-             transform.GetChild(i+8).GetComponent<LineRenderer>().enabled = true;;  
+             transform.GetChild(i+8).GetComponent<LineRenderer>().enabled = true;  
             }
             allowWarningLaser=true;
         }

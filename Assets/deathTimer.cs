@@ -13,4 +13,7 @@ public class deathTimer : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void assignDeathTime(float deathTime){
+        timeTillDeath = deathTime;
+    }
 }
