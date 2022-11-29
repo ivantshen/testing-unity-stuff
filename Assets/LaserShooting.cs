@@ -16,9 +16,11 @@ public class LaserShooting : MonoBehaviour
     private int currentGameObjectIndex = 0;
     private bool stopLaser = false;
      private LayerMask ignoreRaycastLayers;
+     private GameObject boss;
     // Start is called before the first frame update
     void Start()
     {
+        boss = GameObject.FindWithTag("Boss");
         ignoreRaycastLayers = LayerMask.GetMask("EnemyBullets")|LayerMask.GetMask("PlayerBullets");
         transform.GetChild(1).GetComponent<LineRenderer>().enabled = true;
     }
@@ -68,6 +70,7 @@ public class LaserShooting : MonoBehaviour
                 hit.collider.gameObject.GetComponent<Stats>().speedChangePercent(-0.99f,2.85f);
                         if(currentGameObjectIndex==0){
                             firstFiveObjectsHit[currentGameObjectIndex] = hit.collider.gameObject;
+                            boss.GetComponent<NathanYuAI>().StartCoroutine("ThrowAtScannedTarget",hit.collider.gameObject);
                             GameObject warning = Instantiate(warningSign,Camera.main.WorldToScreenPoint(hit.point),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
                             warning.SendMessage("assignDeathTime",3.0f);
                             currentGameObjectIndex++;
@@ -81,6 +84,7 @@ public class LaserShooting : MonoBehaviour
                             }   
                             if(!inArray){
                                 firstFiveObjectsHit[currentGameObjectIndex] = hit.collider.gameObject;
+                                boss.SendMessage("ThrowAtScannedTarget",hit.collider.gameObject);
                                 GameObject warning = Instantiate(warningSign,Camera.main.WorldToScreenPoint(hit.point),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
                                  warning.SendMessage("assignDeathTime",3.0f);
                                 currentGameObjectIndex++;

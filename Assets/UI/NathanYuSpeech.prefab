@@ -230,6 +230,9 @@ MonoBehaviour:
   nathanSpeechTextArea: {fileID: 4586198768092360352}
   currentlyTalking: 0
   hasPhaseChanged: 0
+  nonInstantiatedSprites:
+  - {fileID: 4064908389773938359, guid: b95df514a90628841a2c3b7490454230, type: 3}
+  - {fileID: 4074170187040806763, guid: 04892a633aaa24841ab655f55b7d866b, type: 3}
 --- !u!1 &6944457417647030823
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,11 @@ public class NathanYuAI : MonoBehaviour
     private GameObject instantiatedHealthBar;
     // 0 = spin emitter 1 and 2 = split up map 3 = spitball 4 = explosion
     public GameObject[] moves;
+    public Sprite[] ratStickSprites;
     public Stats stats;
     public Rigidbody2D rb;
     private int currentSizeIncrease =0;
+    private int ratStacks = 0;
     private bool enraged = false;
     private bool bossAwake = false;
     private int currentPhase = 0;
@@ -34,6 +36,8 @@ public class NathanYuAI : MonoBehaviour
     private Camera mainCam;
     private GameObject player;
     private GameObject[] gameBarriers;
+    private GameObject currentRatProjectile;
+    private GameObject ratStick;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,11 +48,13 @@ public class NathanYuAI : MonoBehaviour
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(),currentBarrier.GetComponent<Collider2D>());    
             }
         }
+        ratStick = transform.GetChild(1).GetChild(1).gameObject;
         firepoint1 = transform.GetChild(0).transform;
         mainCam = Camera.main;
         rb.gravityScale = 8f;
         stats.invincible = true;
         player = GameObject.FindWithTag("Player");
+        currentRatProjectile=moves[6];
     }
 
     // Update is called once per frame
@@ -80,6 +86,11 @@ public class NathanYuAI : MonoBehaviour
                      transform.position = Vector2.MoveTowards(transform.position,player.transform.position,step);
                 }
             }
+           // if(stats.health<stats.maxHealth/2&currentPhase==1){
+           //     currentPhase++;
+          //      ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[0];
+          //  }
+            
             if(bossSpitting&&!stopSpitting){
                 StartCoroutine(spit());
             }
@@ -214,7 +225,7 @@ public class NathanYuAI : MonoBehaviour
         }
         while(amountOfPlacements>0){
             amountOfPlacements--;
-            Instantiate(emitter,new Vector2(Random.Range(150f,1770f),Random.Range(100f,980f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(emitter,new Vector2(Random.Range(Screen.width*0.05f,Screen.width*0.95f),Random.Range(Screen.height*0.1f,Screen.height*0.9f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
         }
     }
     private void phase1ExplosionPlacement(){
@@ -235,7 +246,40 @@ public class NathanYuAI : MonoBehaviour
         }
         while(amountOfPlacements>0){
             amountOfPlacements--;
-            Instantiate(explosion,new Vector2(Random.Range(150f,1770f),Random.Range(100f,980f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(explosion,new Vector2(Random.Range(Screen.width*0.05f,Screen.width*0.95f),Random.Range(Screen.height*0.1f,Screen.height*0.9f)),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+        }
+    }
+    private void phase2ScanHit(){
+        GameObject scanner = moves[5];
+        Instantiate(scanner,new Vector2(0f,0f),Quaternion.identity);
+    }
+    IEnumerator ThrowAtScannedTarget(GameObject target){
+        Animation anim = transform.GetChild(1).GetChild(1).gameObject.GetComponent<Animation>();
+        anim.Play("throw",PlayMode.StopAll);
+        yield return new WaitForSeconds(0.95f);
+        anim.Play("idleRatStick",PlayMode.StopAll);
+        Vector3 playerPosition = mainCam.WorldToScreenPoint(player.transform.localPosition);
+        Vector3 currentPosition = mainCam.WorldToScreenPoint(transform.GetChild(1).GetChild(0).position);
+        Vector2 offset = new Vector2(playerPosition.x-currentPosition.x,playerPosition.y-currentPosition.y);
+        float angle = Mathf.Atan2(offset.y,offset.x) *Mathf.Rad2Deg;
+        GameObject stick = Instantiate(currentRatProjectile,transform.GetChild(1).GetChild(0).position,Quaternion.Euler(0f,0f,angle+270));
+        Physics2D.IgnoreCollision(stick.GetComponent<Collider2D>(),GetComponent<Collider2D>());
+        stick.SendMessage("assignDamage",50);
+        stick.SendMessage("assignSpeed",45f);
+    }
+    public void IncreaseRatStack(){
+        ratStacks++;
+        if(ratStacks<3){
+            if(ratStacks==1){
+                ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[1];
+                ratStick.transform.position= new Vector2(0,transform.position.y);
+            }else if(ratStacks==2){
+ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[2];
+ratStick.transform.position= new Vector2(transform.position.x,0.23f*((currentSizeIncrease+1)*0.5f));
+            }else{
+ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[3];
+ratStick.transform.position= new Vector2(-0.15f*((currentSizeIncrease+1)*0.5f),0.5f*((currentSizeIncrease+1)*0.5f));
+            }
         }
     }
     IEnumerator phase0Transition(){
@@ -294,8 +338,8 @@ public class NathanYuAI : MonoBehaviour
              rb.velocity = Vector2.up *rb.gravityScale*3.0f; 
             }
             if(rb.gravityScale==0&&!bossAwake){
-            instantiatedHealthBar = Instantiate(NathanYuHealthBar,new Vector2(960f,960f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
-            Instantiate(NathanYuSpeech,new Vector2(960f,120f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            instantiatedHealthBar = Instantiate(NathanYuHealthBar,new Vector2(Screen.width/2f,Screen.height*0.9f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(NathanYuSpeech,new Vector2(Screen.width/2f,Screen.height*0.15f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             bossAwake = true;
             stats.invincible = false;
             }
