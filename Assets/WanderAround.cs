@@ -16,8 +16,6 @@ public class WanderAround : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Physics2D.IgnoreLayerCollision(6,8);
-        Physics2D.IgnoreLayerCollision(6,6);
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<Stats>();
     }
@@ -43,7 +41,7 @@ public class WanderAround : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         allowDamage=true;
     }
-    IEnumerator changeDirection(){
+    public IEnumerator changeDirection(){
         allowDirectionChange = false;
         if(facingRight){
              transform.rotation = Quaternion.Euler(180f,0f,180f);   

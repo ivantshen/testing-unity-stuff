@@ -67,10 +67,13 @@ public class LaserShooting : MonoBehaviour
         if(hit){
             if(currentGameObjectIndex<5){
             if(hit.collider.gameObject.tag=="Player"||hit.collider.gameObject.tag=="Sentry"||hit.collider.gameObject.tag=="Enemy"){
-                hit.collider.gameObject.GetComponent<Stats>().speedChangePercent(-0.99f,2.85f);
+                if(hit.collider.gameObject.GetComponent<Stats>().movementSpeed>0.15f){
+                hit.collider.gameObject.GetComponent<Stats>().speedChangePercent(-0.25f,1.25f);    
+                }
+                
                         if(currentGameObjectIndex==0){
                             firstFiveObjectsHit[currentGameObjectIndex] = hit.collider.gameObject;
-                            boss.GetComponent<NathanYuAI>().StartCoroutine("ThrowAtScannedTarget",hit.collider.gameObject);
+                            boss.GetComponent<NathanYuAI>().StartCoroutine("addToThrowQueue",hit.collider.gameObject);
                             GameObject warning = Instantiate(warningSign,Camera.main.WorldToScreenPoint(hit.point),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
                             warning.SendMessage("assignDeathTime",3.0f);
                             currentGameObjectIndex++;
@@ -84,7 +87,7 @@ public class LaserShooting : MonoBehaviour
                             }   
                             if(!inArray){
                                 firstFiveObjectsHit[currentGameObjectIndex] = hit.collider.gameObject;
-                                boss.SendMessage("ThrowAtScannedTarget",hit.collider.gameObject);
+                                boss.SendMessage("addToThrowQueue",hit.collider.gameObject);
                                 GameObject warning = Instantiate(warningSign,Camera.main.WorldToScreenPoint(hit.point),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
                                  warning.SendMessage("assignDeathTime",3.0f);
                                 currentGameObjectIndex++;

@@ -38,6 +38,9 @@ public class NathanYuAI : MonoBehaviour
     private GameObject[] gameBarriers;
     private GameObject currentRatProjectile;
     private GameObject ratStick;
+    private GameObject[] throwQueue = new GameObject[5];
+    private int scannedObjects = 0;
+    private bool allowThrowing = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,7 +93,27 @@ public class NathanYuAI : MonoBehaviour
            //     currentPhase++;
           //      ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[0];
           //  }
-            
+            if(allowThrowing&&scannedObjects>0){
+                bool found = false;
+                int indexOfThrow = -1;
+                GameObject target = null;
+                for(int i=0;i<throwQueue.Length;i++){
+                    if(!found){
+                        if(throwQueue[i]!=null){
+                            target = throwQueue[i];
+                            found = true;
+                            indexOfThrow = i;
+                        }
+                    }
+                }
+                if(found){
+                 StartCoroutine(ThrowAtScannedTarget(target));
+                throwQueue[indexOfThrow] = null;
+                }else{
+                    scannedObjects--;
+                }
+                
+            }
             if(bossSpitting&&!stopSpitting){
                 StartCoroutine(spit());
             }
@@ -253,32 +276,49 @@ public class NathanYuAI : MonoBehaviour
         GameObject scanner = moves[5];
         Instantiate(scanner,new Vector2(0f,0f),Quaternion.identity);
     }
+    public void addToThrowQueue(GameObject target){
+        bool added = false;
+        for(int i=0;i<throwQueue.Length;i++){
+            if(!added){
+                if(throwQueue[i]==null){
+                    added = true;
+                    throwQueue[i] = target;
+                    scannedObjects++;
+                }
+            }
+        }
+        }
     IEnumerator ThrowAtScannedTarget(GameObject target){
+        allowThrowing=false;
+        scannedObjects--;
         Animation anim = transform.GetChild(1).GetChild(1).gameObject.GetComponent<Animation>();
         anim.Play("throw",PlayMode.StopAll);
         yield return new WaitForSeconds(0.95f);
         anim.Play("idleRatStick",PlayMode.StopAll);
-        Vector3 playerPosition = mainCam.WorldToScreenPoint(player.transform.localPosition);
+        Vector3 throwPosition = mainCam.WorldToScreenPoint(target.transform.localPosition);
         Vector3 currentPosition = mainCam.WorldToScreenPoint(transform.GetChild(1).GetChild(0).position);
-        Vector2 offset = new Vector2(playerPosition.x-currentPosition.x,playerPosition.y-currentPosition.y);
+        Vector2 offset = new Vector2(throwPosition.x-currentPosition.x,throwPosition.y-currentPosition.y);
         float angle = Mathf.Atan2(offset.y,offset.x) *Mathf.Rad2Deg;
         GameObject stick = Instantiate(currentRatProjectile,transform.GetChild(1).GetChild(0).position,Quaternion.Euler(0f,0f,angle+270));
         Physics2D.IgnoreCollision(stick.GetComponent<Collider2D>(),GetComponent<Collider2D>());
         stick.SendMessage("assignDamage",50);
-        stick.SendMessage("assignSpeed",45f);
+        stick.SendMessage("assignSpeed",55f);
+        allowThrowing=true;
     }
     public void IncreaseRatStack(){
         ratStacks++;
         if(ratStacks<3){
             if(ratStacks==1){
-                ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[1];
-                ratStick.transform.position= new Vector2(0,transform.position.y);
+            ratStick.transform.localPosition= new Vector2(0,transform.localPosition.y);
+            ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[1];
             }else if(ratStacks==2){
-ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[2];
-ratStick.transform.position= new Vector2(transform.position.x,0.23f*((currentSizeIncrease+1)*0.5f));
+            ratStick.transform.localPosition= new Vector2(transform.localPosition.x,0.23f*((currentSizeIncrease+1)*0.5f));
+            ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[2];
+
             }else{
-ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[3];
-ratStick.transform.position= new Vector2(-0.15f*((currentSizeIncrease+1)*0.5f),0.5f*((currentSizeIncrease+1)*0.5f));
+            ratStick.transform.localPosition= new Vector2(-0.15f*((currentSizeIncrease+1)*0.5f),0.5f*((currentSizeIncrease+1)*0.5f));
+            ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[3];
+
             }
         }
     }

@@ -10,12 +10,6 @@ public class EnemyLaserMotion : MonoBehaviour
     public int deathTime =8;
     private bool allowDeathTimeCD = true;
     private bool allowDamage = true;
-    void Start(){
-        Physics2D.IgnoreLayerCollision(8,6,true);
-        Physics2D.IgnoreLayerCollision(8,7,true);
-        Physics2D.IgnoreLayerCollision(8,8,true);
-
-    }
     void FixedUpdate()
     {
         rb.velocity = transform.right*bulletSpeed;

@@ -10,12 +10,6 @@ public class WrenchMotionScript : MonoBehaviour
     private int bulletDamage;
     private int deathTime =4;
     private bool allowDeathTimeCD = true;
-    void Start()
-    {
-        Physics2D.IgnoreLayerCollision(7,3,true);
-        Physics2D.IgnoreLayerCollision(7,7,true);
-        Physics2D.IgnoreLayerCollision(7,8,true);
-    }
     // Update is called once per frame
     void FixedUpdate()
     {

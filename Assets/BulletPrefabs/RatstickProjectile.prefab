@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1071906449040377587}
   - component: {fileID: 2474950734971770302}
   - component: {fileID: 3248156488347646290}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RatstickProjectile
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,7 +150,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3248156488347646290
 MonoBehaviour:
   m_ObjectHideFlags: 0

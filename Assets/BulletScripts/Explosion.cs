@@ -8,12 +8,6 @@ public class Explosion : MonoBehaviour
     private float bulletSpeed;
     private int bulletDamage;
     public float deathTime = 0.45f;
-    void Start(){
-        Physics2D.IgnoreLayerCollision(8,6,true);
-        Physics2D.IgnoreLayerCollision(8,7,true);
-        Physics2D.IgnoreLayerCollision(8,8,true);
-
-    }
     void Update()
     {
         deathTime-=Time.deltaTime;

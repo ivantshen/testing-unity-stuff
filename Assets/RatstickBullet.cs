@@ -11,12 +11,6 @@ public class RatstickBullet : MonoBehaviour
     private bool allowDeathTimeCD = true;
     private bool allowDamage = true;
     private bool allowMovement = true;
-    void Start(){
-        Physics2D.IgnoreLayerCollision(8,6,true);
-        Physics2D.IgnoreLayerCollision(8,7,true);
-        Physics2D.IgnoreLayerCollision(8,8,true);
-
-    }
     void FixedUpdate()
     {
         if(allowMovement){
@@ -57,6 +51,9 @@ public class RatstickBullet : MonoBehaviour
         other.GetComponent<Stats>().speedChangePercent(0.99f,1.25f); 
         other.GetComponent<Stats>().decreaseHealth(bulletDamage*damageMult); 
         yield return new WaitForSeconds(0.75f);
+        if(other&&other.tag=="Player"){
+        other.GetComponent<PlayerMovement>().allowMovement=true;    
+        }
         allowDamage = true;
     }
     private void OnCollisionEnter2D(Collision2D other) {
@@ -73,6 +70,7 @@ public class RatstickBullet : MonoBehaviour
         if(other.gameObject.tag=="GameBarrier"){
             allowMovement = false;
             rb.velocity = new Vector2(0f,0f);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             rb.freezeRotation = true;;
         }
         }
