@@ -67,8 +67,8 @@ public class LaserShooting : MonoBehaviour
         if(hit){
             if(currentGameObjectIndex<5){
             if(hit.collider.gameObject.tag=="Player"||hit.collider.gameObject.tag=="Sentry"||hit.collider.gameObject.tag=="Enemy"){
-                if(hit.collider.gameObject.GetComponent<Stats>().movementSpeed>0.15f){
-                hit.collider.gameObject.GetComponent<Stats>().speedChangePercent(-0.25f,1.25f);    
+                if(hit.collider.gameObject.GetComponent<Stats>().movementSpeed>0.025f){
+                hit.collider.gameObject.GetComponent<Stats>().speedChangePercent(-0.99f,1.25f);    
                 }
                 
                         if(currentGameObjectIndex==0){
@@ -96,7 +96,7 @@ public class LaserShooting : MonoBehaviour
                   Instantiate(laserEndpoint,hit.point,Quaternion.identity);
                 lineRenderer.SetPosition(0,firePoint.position);
                 lineRenderer.SetPosition(1,hit.point);      
-                }else if(hit.collider.gameObject.tag=="GameBarrier"){
+                }else if(hit.collider.gameObject.tag=="GameBarrier"||hit.collider.gameObject.layer==11){
                 Instantiate(laserEndpoint,hit.point,Quaternion.identity);
                 lineRenderer.SetPosition(0,firePoint.position);
                 lineRenderer.SetPosition(1,hit.point);

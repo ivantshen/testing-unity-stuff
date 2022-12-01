@@ -309,10 +309,10 @@ public class NathanYuAI : MonoBehaviour
         ratStacks++;
         if(ratStacks<3){
             if(ratStacks==1){
-            ratStick.transform.localPosition= new Vector2(0,transform.localPosition.y);
+            ratStick.transform.localPosition= new Vector2(0,ratStick.transform.localPosition.y);
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[1];
             }else if(ratStacks==2){
-            ratStick.transform.localPosition= new Vector2(transform.localPosition.x,0.23f*((currentSizeIncrease+1)*0.5f));
+            ratStick.transform.localPosition= new Vector2(ratStick.transform.localPosition.x,0.23f*((currentSizeIncrease+1)*0.5f));
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[2];
 
             }else{

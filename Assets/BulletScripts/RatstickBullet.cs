@@ -11,6 +11,17 @@ public class RatstickBullet : MonoBehaviour
     private bool allowDeathTimeCD = true;
     private bool allowDamage = true;
     private bool allowMovement = true;
+    public Sprite spriteToChangeTo;
+    private GameObject[] gameBarriers;
+    void Start(){
+        gameBarriers = GameObject.FindGameObjectsWithTag("GameBarrier");
+        foreach (GameObject currentBarrier in gameBarriers)
+        {
+            if(currentBarrier.layer==9){
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(),currentBarrier.GetComponent<Collider2D>());    
+            }
+        }
+    }
     void FixedUpdate()
     {
         if(allowMovement){
@@ -56,6 +67,13 @@ public class RatstickBullet : MonoBehaviour
         }
         allowDamage = true;
     }
+    IEnumerator waitAndFreeze(){
+        yield return new WaitForSeconds(0.15f);
+     allowMovement = false;
+            rb.velocity = new Vector2(0f,0f);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            rb.freezeRotation = true;;   
+    }
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag!="Boss"){
         if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
@@ -65,13 +83,11 @@ public class RatstickBullet : MonoBehaviour
         }
         if(other.gameObject.tag=="Enemy"&&allowDamage){
             StartCoroutine(damageItem(other.gameObject,15));
+            this.GetComponent<SpriteRenderer>().sprite = spriteToChangeTo;
             GameObject.FindWithTag("Boss").SendMessage("IncreaseRatStack");
         }
         if(other.gameObject.tag=="GameBarrier"){
-            allowMovement = false;
-            rb.velocity = new Vector2(0f,0f);
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-            rb.freezeRotation = true;;
+            StartCoroutine(waitAndFreeze());
         }
         }
         }

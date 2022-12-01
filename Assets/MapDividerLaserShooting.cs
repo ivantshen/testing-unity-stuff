@@ -86,7 +86,7 @@ public class MapDividerLaserShooting : MonoBehaviour
                 Instantiate(laserEndpoint,hit.point,Quaternion.identity);
                 lineRenderer.SetPosition(0,firePoint.position);
                 lineRenderer.SetPosition(1,hit.point);
-            }else if(hit.collider.gameObject.tag=="GameBarrier"){
+            }else if(hit.collider.gameObject.tag=="GameBarrier"||hit.collider.gameObject.layer==11){
                 Instantiate(laserEndpoint,hit.point,Quaternion.identity);
                 lineRenderer.SetPosition(0,firePoint.position);
                 lineRenderer.SetPosition(1,hit.point);
