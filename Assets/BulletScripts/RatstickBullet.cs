@@ -67,13 +67,6 @@ public class RatstickBullet : MonoBehaviour
         }
         allowDamage = true;
     }
-    IEnumerator waitAndFreeze(){
-        yield return new WaitForSeconds(0.15f);
-     allowMovement = false;
-            rb.velocity = new Vector2(0f,0f);
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-            rb.freezeRotation = true;;   
-    }
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag!="Boss"){
         if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
@@ -86,9 +79,14 @@ public class RatstickBullet : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = spriteToChangeTo;
             GameObject.FindWithTag("Boss").SendMessage("IncreaseRatStack");
         }
+        }
+        }
+    private void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag=="GameBarrier"){
-            StartCoroutine(waitAndFreeze());
+           allowMovement = false;
+            rb.velocity = new Vector2(0f,0f);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            rb.freezeRotation = true;;  
         }
-        }
-        }
+    }
     }
