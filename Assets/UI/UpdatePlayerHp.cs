@@ -12,19 +12,23 @@ public class UpdatePlayerHp : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Stats>();
+        if(player){
         healthBar = GetComponent<Slider>();
         healthBar.maxValue = player.maxHealth;
-        healthBar.value = player.maxHealth;
+        healthBar.value = player.maxHealth;    
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(player){
         if(player.health<=0){
             healthBarDisplay.text = "RIP";
         }else{
             healthBarDisplay.text = player.health.ToString();
         }
-        healthBar.value = player.health;
+        healthBar.value = player.health;    
+        }
     }
 }
