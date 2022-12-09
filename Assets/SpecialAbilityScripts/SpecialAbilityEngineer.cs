@@ -19,7 +19,7 @@ public class SpecialAbilityEngineer : MonoBehaviour
     // Start is called before the first frame update
     // Update is called once per frame
     void Start(){
-        abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
+        abilityBar = GameObject.FindWithTag("AbilityBar");
         abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
         abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
     }

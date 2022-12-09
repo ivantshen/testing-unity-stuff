@@ -14,7 +14,7 @@ public class SpecialAbilityGunslinger : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
-        abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
+        abilityBar = GameObject.FindWithTag("AbilityBar");
         abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
         abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
     }

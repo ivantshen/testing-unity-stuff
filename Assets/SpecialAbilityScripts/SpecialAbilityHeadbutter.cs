@@ -21,7 +21,7 @@ public class SpecialAbilityHeadbutter : MonoBehaviour
         if(dashDuration<.35f){
             dashDuration = 0.35f;
         }
-        abilityBar = GameObject.FindWithTag("MainCanvas").transform.Find("AbilityBar").gameObject;
+        abilityBar = GameObject.FindWithTag("AbilityBar");
         abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
         abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
     }

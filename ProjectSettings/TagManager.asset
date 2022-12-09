@@ -14,6 +14,8 @@ TagManager:
   - Boss
   - PlayerBarricade
   - NathanTalking
+  - AbilityBar
+  - BackgroundCanvas
   layers:
   - Default
   - TransparentFX
