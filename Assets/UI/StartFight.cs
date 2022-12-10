@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class StartFight : MonoBehaviour
 {
     public GameObject GUI;
@@ -12,6 +13,7 @@ public class StartFight : MonoBehaviour
     public Button[] characterSelectButtons;
     public Button startButton;
     public GameObject boss;
+    public TMP_Text selectedCharacterText;
     private GameObject canvasBackground;
     // Start is called before the first frame update
     void Start()
@@ -30,11 +32,12 @@ public class StartFight : MonoBehaviour
         Instantiate(character, new Vector3(0f,0f,0f),Quaternion.identity,null);
         Instantiate(healthBar,new Vector2(Screen.width*0.07f,Screen.height*0.95f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
         Instantiate(boss,new Vector2(18.5f,9.5f),Quaternion.Euler(180f,0f,180f),null);
-        Destroy(canvasBackground);
+        canvasBackground.GetComponent<Image>().enabled = false;
         GUI.SetActive(false);
         }
          }
     void SetCharacter(GameObject character){
         this.character = character;
+        selectedCharacterText.text = "Current Character: " + character.name;
     }
 }

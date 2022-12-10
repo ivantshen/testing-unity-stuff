@@ -12,6 +12,7 @@ public class AlignPlayerSelectionGUI : MonoBehaviour
         transform.GetChild(2).position = new Vector2(Screen.width*0.75f,Screen.height*0.65f);
         transform.GetChild(3).position = new Vector2(Screen.width*0.5f,Screen.height*0.35f);
         transform.GetChild(4).position = new Vector2(Screen.width*0.5f,Screen.height*0.1f);
+        transform.GetChild(5).position = new Vector2(Screen.width*0.5f,Screen.height*0.2f);
     }
 
 }

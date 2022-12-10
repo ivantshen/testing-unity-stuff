@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Stats : MonoBehaviour
     public float movementSpeed;
     public bool invincible = false;
     private float damageTakenMultiplier =1;
+    public bool isPlayer = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,16 @@ public class Stats : MonoBehaviour
         if(!invincible){
          health-=(int)(amtToDecrease*damageTakenMultiplier);
         if(health<=0){
+            if(isPlayer){
+                GameObject.FindWithTag("BackgroundCanvas").GetComponent<Image>().enabled = true;
+                Destroy(GameObject.FindWithTag("AbilityBar"));
+                Destroy(GameObject.FindWithTag("HealthBar"));
+                foreach(GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[]){
+                    if(obj.tag =="DeathScreenUI"){
+                        obj.SetActive(true);
+                    }
+                }
+            }
             Destroy(gameObject);
         }   
         }

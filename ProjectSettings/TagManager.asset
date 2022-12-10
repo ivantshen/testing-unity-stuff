@@ -16,6 +16,10 @@ TagManager:
   - NathanTalking
   - AbilityBar
   - BackgroundCanvas
+  - StartGameButton
+  - CharacterGUI
+  - DeathScreenUI
+  - HealthBar
   layers:
   - Default
   - TransparentFX
