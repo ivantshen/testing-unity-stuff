@@ -40,6 +40,7 @@ public class NathanYuAI : MonoBehaviour
     private GameObject ratStick;
     private GameObject[] throwQueue = new GameObject[5];
     private int scannedObjects = 0;
+    private float ratStickSpeed = 45f;
     private bool allowThrowing = true;
     // Start is called before the first frame update
     void Start()
@@ -106,7 +107,7 @@ public class NathanYuAI : MonoBehaviour
                         }
                     }
                 }
-                if(found){
+                if(found&&target){
                  StartCoroutine(ThrowAtScannedTarget(target));
                 throwQueue[indexOfThrow] = null;
                 }else{
@@ -291,7 +292,7 @@ public class NathanYuAI : MonoBehaviour
     IEnumerator ThrowAtScannedTarget(GameObject target){
         allowThrowing=false;
         scannedObjects--;
-        Animation anim = transform.GetChild(1).GetChild(1).gameObject.GetComponent<Animation>();
+         Animation anim = transform.GetChild(1).GetChild(1).gameObject.GetComponent<Animation>();
         anim.Play("throw",PlayMode.StopAll);
         yield return new WaitForSeconds(0.95f);
         anim.Play("idleRatStick",PlayMode.StopAll);
@@ -302,23 +303,27 @@ public class NathanYuAI : MonoBehaviour
         GameObject stick = Instantiate(currentRatProjectile,transform.GetChild(1).GetChild(0).position,Quaternion.Euler(0f,0f,angle+270));
         Physics2D.IgnoreCollision(stick.GetComponent<Collider2D>(),GetComponent<Collider2D>());
         stick.SendMessage("assignDamage",50);
-        stick.SendMessage("assignSpeed",55f);
+        stick.SendMessage("assignSpeed",ratStickSpeed);   
         allowThrowing=true;
     }
     public void IncreaseRatStack(){
         ratStacks++;
-        if(ratStacks<3){
+        if(ratStacks<=3){
             if(ratStacks==1){
             ratStick.transform.localPosition= new Vector2(0,ratStick.transform.localPosition.y);
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[1];
+            currentRatProjectile = moves[7];
+            ratStickSpeed=25f;
             }else if(ratStacks==2){
             ratStick.transform.localPosition= new Vector2(ratStick.transform.localPosition.x,0.23f*((currentSizeIncrease+1)*0.5f));
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[2];
-
+            currentRatProjectile = moves[8];
+            ratStickSpeed-=20f;
             }else{
             ratStick.transform.localPosition= new Vector2(-0.15f*((currentSizeIncrease+1)*0.5f),0.5f*((currentSizeIncrease+1)*0.5f));
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[3];
-
+            currentRatProjectile = moves[9];
+            ratStickSpeed=35f;
             }
         }
     }

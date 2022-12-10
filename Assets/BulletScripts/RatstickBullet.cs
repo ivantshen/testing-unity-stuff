@@ -7,8 +7,7 @@ public class RatstickBullet : MonoBehaviour
     public Rigidbody2D rb;
     private float bulletSpeed;
     private int bulletDamage;
-    public int deathTime =8;
-    private bool allowDeathTimeCD = true;
+    public float deathTime;
     private bool allowDamage = true;
     private bool allowMovement = true;
     public Sprite spriteToChangeTo;
@@ -22,37 +21,22 @@ public class RatstickBullet : MonoBehaviour
             }
         }
     }
-    void FixedUpdate()
+    void Update()
     {
         if(allowMovement){
         rb.velocity = transform.up*bulletSpeed;    
         }
-        
-        if(allowDeathTimeCD&&deathTime>0){
-        StartCoroutine(deathTimeCountDown());
+        if(deathTime>0){
+            deathTime-=Time.deltaTime;
+        }else{
+            Destroy(gameObject);
         }
     }
     void assignSpeed(float spd){
         bulletSpeed = spd;
-        if(bulletSpeed!=0){
-        deathTime = (int)(deathTime/(bulletSpeed/3.0f));
-        }
-        
-    }
-    void assignDeathTime(int death){
-        deathTime = death;
     }
     void assignDamage(int dmg){
         bulletDamage = dmg;
-    }
-    IEnumerator deathTimeCountDown(){
-        allowDeathTimeCD = false;
-        yield return new WaitForSeconds(1);
-        deathTime--;
-        if(deathTime==0){
-            Destroy(gameObject);
-        }
-        allowDeathTimeCD = true;
     }
     IEnumerator damageItem(GameObject other,int damageMult){
         allowDamage = false;
@@ -86,7 +70,11 @@ public class RatstickBullet : MonoBehaviour
            allowMovement = false;
             rb.velocity = new Vector2(0f,0f);
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-            rb.freezeRotation = true;;  
+            rb.freezeRotation = true;
+            deathTime = 2.25f;  
+            if(GetComponent<EnemyShooting>()){
+                Destroy(GetComponent<EnemyShooting>());
+            }
         }
     }
     }

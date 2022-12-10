@@ -14,7 +14,7 @@ public class LaserShooting : MonoBehaviour
     private bool stopWarningLaser = false;
     private GameObject[] firstFiveObjectsHit = new GameObject[5];
     private int currentGameObjectIndex = 0;
-    private bool stopLaser = false;
+    private bool stopLaser = true;
      private LayerMask ignoreRaycastLayers;
      private GameObject boss;
     // Start is called before the first frame update
@@ -40,6 +40,7 @@ public class LaserShooting : MonoBehaviour
             if(stopWarningLaser){
             allowWarningLaser=false;
             hasWarningLaser=false;
+            stopLaser=false;
             transform.GetChild(1).GetComponent<LineRenderer>().enabled = false;
             transform.GetChild(0).GetComponent<LineRenderer>().enabled = true;   
             allowFire = true;
