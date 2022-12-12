@@ -25,6 +25,7 @@ public class Stats : MonoBehaviour
         if(health<=0){
             if(isPlayer){
                 GameObject.FindWithTag("BackgroundCanvas").GetComponent<Image>().enabled = true;
+                GameObject.FindWithTag("BackgroundCanvas").GetComponent<Image>().color = new Color(135,135,135,0.3f);
                 Destroy(GameObject.FindWithTag("AbilityBar"));
                 Destroy(GameObject.FindWithTag("HealthBar"));
                 foreach(GameObject obj in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[]){

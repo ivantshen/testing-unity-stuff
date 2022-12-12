@@ -10,6 +10,7 @@ public class RestartGame : MonoBehaviour
     void Start()
     {
         deathScreenButton.onClick.AddListener(resetGame);
+        gameObject.SetActive(false);
     }
     void resetGame(){
         SceneManager.LoadScene("NathanBossFight");

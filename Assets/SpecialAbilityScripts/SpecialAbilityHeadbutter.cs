@@ -69,9 +69,4 @@ public class SpecialAbilityHeadbutter : MonoBehaviour
         }
         }
         }
-    private void OnTriggerEnter2D(Collider2D other){
-     if(isDashing&&(other.gameObject.tag=="Enemy"||other.gameObject.tag=="Boss")){
-            other.gameObject.GetComponent<Stats>().decreaseHealth(dashDamage);
-        }
-    }
 }
