@@ -1,0 +1,215 @@
+{
+    "name": "root",
+    "gauges": {
+        "Movement.Policy.Entropy.mean": {
+            "value": 3.165922164916992,
+            "min": 1.7009087800979614,
+            "max": 3.2302072048187256,
+            "count": 156
+        },
+        "Movement.Policy.Entropy.sum": {
+            "value": 158280.28125,
+            "min": 84638.921875,
+            "max": 161377.921875,
+            "count": 156
+        },
+        "Movement.Step.mean": {
+            "value": 7799954.0,
+            "min": 49988.0,
+            "max": 7799954.0,
+            "count": 156
+        },
+        "Movement.Step.sum": {
+            "value": 7799954.0,
+            "min": 49988.0,
+            "max": 7799954.0,
+            "count": 156
+        },
+        "Movement.Policy.ExtrinsicValueEstimate.mean": {
+            "value": -8.996530532836914,
+            "min": -12.735718727111816,
+            "max": 47.58622741699219,
+            "count": 156
+        },
+        "Movement.Policy.ExtrinsicValueEstimate.sum": {
+            "value": -7260.2001953125,
+            "min": -10366.875,
+            "max": 38354.5,
+            "count": 156
+        },
+        "Movement.Environment.EpisodeLength.mean": {
+            "value": 1032.1568627450981,
+            "min": 692.0571428571428,
+            "max": 1783.357142857143,
+            "count": 156
+        },
+        "Movement.Environment.EpisodeLength.sum": {
+            "value": 52640.0,
+            "min": 42524.0,
+            "max": 59047.0,
+            "count": 156
+        },
+        "Movement.Environment.CumulativeReward.mean": {
+            "value": -79.64145428526635,
+            "min": -136.48363157554908,
+            "max": -62.71343145565111,
+            "count": 156
+        },
+        "Movement.Environment.CumulativeReward.sum": {
+            "value": -4061.714168548584,
+            "min": -6863.900160610676,
+            "max": -2921.1861574053764,
+            "count": 156
+        },
+        "Movement.Policy.ExtrinsicReward.mean": {
+            "value": -79.64145428526635,
+            "min": -136.48363157554908,
+            "max": -62.71343145565111,
+            "count": 156
+        },
+        "Movement.Policy.ExtrinsicReward.sum": {
+            "value": -4061.714168548584,
+            "min": -6863.900160610676,
+            "max": -2921.1861574053764,
+            "count": 156
+        },
+        "Movement.Losses.PolicyLoss.mean": {
+            "value": 0.022534992621270553,
+            "min": 0.020045684233967527,
+            "max": 0.036820725362364706,
+            "count": 156
+        },
+        "Movement.Losses.PolicyLoss.sum": {
+            "value": 0.09013997048508221,
+            "min": 0.08265171439173476,
+            "max": 0.14728290144945883,
+            "count": 156
+        },
+        "Movement.Losses.ValueLoss.mean": {
+            "value": 20.518201176325483,
+            "min": 7.721063424746196,
+            "max": 259.49981889724734,
+            "count": 156
+        },
+        "Movement.Losses.ValueLoss.sum": {
+            "value": 82.07280470530193,
+            "min": 35.39912805557251,
+            "max": 1037.9992755889893,
+            "count": 156
+        },
+        "Movement.Policy.LearningRate.mean": {
+            "value": 0.000253346067551316,
+            "min": 0.000253346067551316,
+            "max": 0.0002998423785525405,
+            "count": 156
+        },
+        "Movement.Policy.LearningRate.sum": {
+            "value": 0.001013384270205264,
+            "min": 0.001013384270205264,
+            "max": 0.001497825648724784,
+            "count": 156
+        },
+        "Movement.Policy.Epsilon.mean": {
+            "value": 0.18444868399999997,
+            "min": 0.18444868399999997,
+            "max": 0.1999474595,
+            "count": 156
+        },
+        "Movement.Policy.Epsilon.sum": {
+            "value": 0.7377947359999999,
+            "min": 0.7377947359999999,
+            "max": 0.9992752159999999,
+            "count": 156
+        },
+        "Movement.Policy.Beta.mean": {
+            "value": 0.0042239893316,
+            "min": 0.0042239893316,
+            "max": 0.00499737822905,
+            "count": 156
+        },
+        "Movement.Policy.Beta.sum": {
+            "value": 0.0168959573264,
+            "min": 0.0168959573264,
+            "max": 0.024963833278400002,
+            "count": 156
+        },
+        "Movement.IsTraining.mean": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 156
+        },
+        "Movement.IsTraining.sum": {
+            "value": 1.0,
+            "min": 1.0,
+            "max": 1.0,
+            "count": 156
+        }
+    },
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1694852538",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\ivant\\OneDrive\\Documents\\GitHub\\testing-unity-stuff\\venv\\Scripts\\mlagents-learn --run-id=Stage2Test9 C:\\Users\\ivant\\OneDrive\\Documents\\GitHub\\testing-unity-stuff\\results\\Stage2Test9\\configuration.yaml --resume",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.0.1+cu118",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1694870950"
+    },
+    "total": 18412.7220157,
+    "count": 1,
+    "self": 0.03343640000093728,
+    "children": {
+        "run_training.setup": {
+            "total": 0.11495580000000016,
+            "count": 1,
+            "self": 0.11495580000000016
+        },
+        "TrainerController.start_learning": {
+            "total": 18412.5736235,
+            "count": 1,
+            "self": 18.1197612998767,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 6.618958300000001,
+                    "count": 1,
+                    "self": 6.618958300000001
+                },
+                "TrainerController.advance": {
+                    "total": 18387.276942700122,
+                    "count": 877661,
+                    "self": 16.87327499998719,
+                    "children": {
+                        "env_step": {
+                            "total": 16105.66981779982,
+                            "count": 877661,
+                            "self": 11715.001978799879,
+                            "children": {
+                                "SubprocessEnvManager._take_step": {
+                                    "total": 4379.192607200313,
+                                    "count": 877661,
+                                    "self": 47.881067601214454,
+                                    "children": {
+                                        "TorchPolicy.evaluate": {
+                                            "total": 4331.311539599099,
+                                            "count": 872195,
+                                            "self": 1382.182150798808,
+                                            "children": {
+                                                "TorchPolicy.sample_actions": {
+                                                    "total": 2949.129388800291,
+                                                    "count": 872195,
+                                                    "self": 2949.129388800291
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "workers": {
+                                    "total": 11.475231799628574,
+                                    "count": 877661,
+                                    "self": 0.0,
+                                    "children": {
+                                        "worker_root": {
+                                            "total": 18381.674291800893

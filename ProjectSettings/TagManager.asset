@@ -33,7 +33,7 @@ TagManager:
   - GameBarriers
   - Ground
   - NeutralBullet
-  - 
+  - OnlyCollideWithPlayer
   - 
   - 
   - 

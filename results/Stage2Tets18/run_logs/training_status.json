@@ -1,0 +1,29 @@
+{
+    "Movement": {
+        "checkpoints": [
+            {
+                "steps": 54132,
+                "file_path": "results\\Stage2Tets18\\Movement\\Movement-54132.onnx",
+                "reward": -92.03800663948059,
+                "creation_time": 1694971515.9227793,
+                "auxillary_file_paths": [
+                    "results\\Stage2Tets18\\Movement\\Movement-54132.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 54132,
+            "file_path": "results\\Stage2Tets18\\Movement.onnx",
+            "reward": -92.03800663948059,
+            "creation_time": 1694971515.9227793,
+            "auxillary_file_paths": [
+                "results\\Stage2Tets18\\Movement\\Movement-54132.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.0.1+cu118"
+    }
+}

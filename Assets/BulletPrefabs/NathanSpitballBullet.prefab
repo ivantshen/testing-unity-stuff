@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6801783613433046334}
   - component: {fileID: 7610598444652620657}
   - component: {fileID: 4775255952938414979}
+  - component: {fileID: -5786388639375617662}
   m_Layer: 8
   m_Name: NathanSpitballBullet
   m_TagString: EnemyBullet
@@ -121,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6801783613433046334}
-  deathTime: 8
+  deathTime: 11
 --- !u!70 &4775255952938414979
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +139,16 @@ CapsuleCollider2D:
   m_Offset: {x: 1.1052806, y: -0.0000001317597}
   m_Size: {x: 3.3955033, y: 3.0001268}
   m_Direction: 1
+--- !u!114 &-5786388639375617662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476756805363136016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3339369da4c3241b38c8aee356abfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletType: 1

@@ -144,6 +144,10 @@ MonoBehaviour:
   movementSpeed: 3.2
   invincible: 0
   isPlayer: 1
+  ml: 0
+  agentRewardModifier: 0.25
+  agent: {fileID: 0}
+  bossDeathReward: 500
 --- !u!114 &1501605695229604088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98a4316ddd52184bbbb0d83f0362bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1501605695229604090}
   stats: {fileID: 1501605695229604091}
   allowMovement: 1
 --- !u!114 &1501605695229604089

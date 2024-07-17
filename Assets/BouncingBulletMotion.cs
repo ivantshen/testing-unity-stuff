@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BouncingBulletMotion : MonoBehaviour
+{
+    public Rigidbody2D rb;
+    private float bulletSpeed;
+    private int bulletDamage;
+    public int deathTime =8;
+    private bool allowDeathTimeCD = true;
+    private Vector2 currentBulletPath;
+    void Start(){
+        currentBulletPath = transform.right;
+    }
+    void FixedUpdate()
+    {
+        rb.velocity=currentBulletPath*bulletSpeed;
+        if(allowDeathTimeCD&&deathTime>0){
+        StartCoroutine(deathTimeCountDown());
+        }
+    }
+    void assignSpeed(float spd){
+        bulletSpeed = spd;
+        rb.velocity = transform.right*bulletSpeed;
+        if(bulletSpeed!=0){
+        deathTime = (int)(deathTime/(bulletSpeed/3.0f));
+        }
+        
+    }
+    void assignDeathTime(int death){
+        deathTime = death;
+    }
+    void assignDamage(int dmg){
+        bulletDamage = dmg;
+    }
+    IEnumerator deathTimeCountDown(){
+        allowDeathTimeCD = false;
+        yield return new WaitForSeconds(1);
+        deathTime--;
+        if(deathTime==0){
+            Destroy(gameObject);
+        }
+        allowDeathTimeCD = true;
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
+        if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
+            if(other.gameObject.GetComponent<Stats>()){
+            other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);    
+            }else if(other.gameObject.GetComponent<MLStats>()){
+            other.gameObject.GetComponent<MLStats>().decreaseHealth(bulletDamage);       
+            }
+            Destroy(gameObject);
+        }
+        }
+
+        if((other.gameObject.tag!="PlayerBullet")&&other.gameObject.tag!="EnemyBullet"){
+            currentBulletPath=transform.right;
+            currentBulletPath = Vector2.Reflect(currentBulletPath.normalized,other.contacts[0].normal);
+        }
+        }
+    }

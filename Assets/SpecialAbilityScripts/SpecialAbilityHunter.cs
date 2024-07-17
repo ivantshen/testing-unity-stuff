@@ -8,21 +8,17 @@ public class SpecialAbilityHunter : MonoBehaviour
     public GameObject trap;
     public int trapDamage;
     public float trapSpeed;
-    private int currentSpecialCD = 0;
-    private bool allowSpecialCDDecrease = true;
-    private GameObject abilityBar;
+    private UpdateAbilityBar abilityBar;
     // Update is called once per frame
     void Start(){
-        abilityBar = GameObject.FindWithTag("AbilityBar");
-        abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
-        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
+        abilityBar = GameObject.FindWithTag("AbilityBar").GetComponent<UpdateAbilityBar>();
+        abilityBar.assignAbilityMaxCooldown(specialCD);
     }
     void Update()
     {
-        if(currentSpecialCD>0&&allowSpecialCDDecrease){
-            StartCoroutine(waitForSpecialCD());
-        }
-        if(Input.GetKeyDown("space")&&currentSpecialCD==0){
+        if(Input.GetKeyDown("space")&&abilityBar.abilityIsReady()){
+            abilityBar.usedAbility();
+            ScreenShake.Instance.ShakeCamera(8f,0.75f);
             Transform weapon = transform.Find("Weapon").transform;
             for(int i=0;i<6;i++){
             GameObject newBullet = Instantiate(trap,weapon.GetChild(i).transform.position,weapon.GetChild(i).transform.rotation) as GameObject;
@@ -38,14 +34,6 @@ public class SpecialAbilityHunter : MonoBehaviour
                 newBullet.SendMessage("assignRotateLeft",true);
             }
             }
-            currentSpecialCD+=specialCD;
         }
-    }
-    IEnumerator waitForSpecialCD(){
-    allowSpecialCDDecrease = false;
-        yield return new WaitForSeconds(1);
-        currentSpecialCD--;
-        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
-    allowSpecialCDDecrease = true;
     }
 }

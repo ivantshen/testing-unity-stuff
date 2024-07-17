@@ -12,7 +12,7 @@ public class EnemyShooting : MonoBehaviour
     public float delayBetweenBullets =0f;
     public float fireRate;
     private bool allowFire = true;
-
+    [SerializeField] private float randomAngleOffset = 0;
 
     // Update is called once per frame
     void Update()
@@ -24,7 +24,8 @@ public class EnemyShooting : MonoBehaviour
     IEnumerator generateBullet(){
         allowFire = false;
         for(int i=0;i<numBullets;i++){
-          GameObject newBullet = Instantiate(bullet,transform.GetChild(i).transform.position,transform.GetChild(i).transform.rotation) as GameObject;
+          Quaternion offset = Quaternion.AngleAxis(Random.Range(-randomAngleOffset,randomAngleOffset), Vector3.forward);
+          GameObject newBullet = Instantiate(bullet,transform.GetChild(i).transform.position,transform.GetChild(i).rotation*offset) as GameObject;
             newBullet.SendMessage("assignDamage",bulletDamage);
             newBullet.SendMessage("assignSpeed",bulletSpeed);
             if(deathTime!=0){

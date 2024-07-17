@@ -8,8 +8,11 @@ public class RatstickBullet : MonoBehaviour
     private float bulletSpeed;
     private int bulletDamage;
     public float deathTime;
+    [SerializeField] private SpriteRenderer sr;
     private bool allowDamage = true;
     private bool allowMovement = true;
+    private bool hitPlayerAlready=false;
+    private bool hitRatAlready=false;
     public Sprite spriteToChangeTo;
     private GameObject[] gameBarriers;
     void Start(){
@@ -39,7 +42,6 @@ public class RatstickBullet : MonoBehaviour
         bulletDamage = dmg;
     }
     IEnumerator damageItem(GameObject other,int damageMult){
-        allowDamage = false;
         if(other.tag=="Player"){
         other.GetComponent<PlayerMovement>().allowMovement=false;    
         }
@@ -51,30 +53,33 @@ public class RatstickBullet : MonoBehaviour
         }
         allowDamage = true;
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag!="Boss"){
-        if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
-             if(other.gameObject.tag=="Player"&&allowDamage){
+    private void OnCollisionStay2D(Collision2D other) {
+        string tempTag = other.gameObject.tag;
+        if(tempTag!="Boss"&&allowDamage){
+            if(tempTag=="Player"&&!hitPlayerAlready){
+                allowDamage = false;
+                hitPlayerAlready = true;
                 StartCoroutine(damageItem(other.gameObject,1));
-             }
+            }else if(tempTag=="Sentry"||tempTag=="PlayerBarricade"){
+                allowDamage = false;
+                StartCoroutine(damageItem(other.gameObject,1));
+            }
+            if(tempTag=="Enemy"&&!hitRatAlready){
+                hitRatAlready=true;
+                allowDamage = false;
+                StartCoroutine(damageItem(other.gameObject,15));
+                sr.sprite = spriteToChangeTo;
+                GameObject.FindWithTag("Boss").SendMessage("IncreaseRatStack");
+            }
         }
-        if(other.gameObject.tag=="Enemy"&&allowDamage){
-            StartCoroutine(damageItem(other.gameObject,15));
-            this.GetComponent<SpriteRenderer>().sprite = spriteToChangeTo;
-            GameObject.FindWithTag("Boss").SendMessage("IncreaseRatStack");
-        }
-        }
-        }
+    }
     private void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag=="GameBarrier"){
            allowMovement = false;
             rb.velocity = new Vector2(0f,0f);
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
             rb.freezeRotation = true;
-            deathTime = 2.25f;  
-            if(GetComponent<EnemyShooting>()){
-                Destroy(GetComponent<EnemyShooting>());
-            }
+            deathTime = 2.25f;
         }
     }
     }

@@ -6,17 +6,14 @@ public class SpecialAbilityGunslinger : MonoBehaviour
 {
     public int specialCD;
     public int specialLength;
-    private int currentSpecialCD = 0;
     private int currentSpecialLength = 0;
-    private bool allowSpecialCDDecrease = true;
     private bool allowSpecialLengthDecrease = true;
-    private GameObject abilityBar;
+    private UpdateAbilityBar abilityBar;
     // Update is called once per frame
     void Awake(){
         transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = false;
-        abilityBar = GameObject.FindWithTag("AbilityBar");
-        abilityBar.SendMessage("assignAbilityMaxCooldown",specialCD);
-        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
+        abilityBar = GameObject.FindWithTag("AbilityBar").GetComponent<UpdateAbilityBar>();
+        abilityBar.assignAbilityMaxCooldown(specialCD);
     }
     void Update()
     {
@@ -25,27 +22,18 @@ public class SpecialAbilityGunslinger : MonoBehaviour
         }else if(Input.GetAxisRaw("Horizontal")<0){
             transform.Find("GunslingerCowboyHat").transform.localRotation = Quaternion.Euler(0,180,0);
         }
-        if(allowSpecialCDDecrease&&currentSpecialCD>0){
-            StartCoroutine(waitForSpecialCD());
-        }
         if(allowSpecialLengthDecrease&&currentSpecialLength>0){
             StartCoroutine(waitForSpecialLength());
         }
-        if(currentSpecialCD==0&&Input.GetKeyDown("space")){
+        if(abilityBar.abilityIsReady()&&Input.GetKeyDown("space")){
+            abilityBar.usedAbility();
+            ScreenShake.Instance.ShakeCamera(8f,0.75f);
             transform.Find("GunslingerCowboyHat").GetComponent<SpriteRenderer>().enabled = true;
               transform.GetChild(0).gameObject.GetComponent<WeaponShooting>().fireRate/=2.0f;  
                transform.GetChild(1).gameObject.GetComponent<WeaponShooting>().fireRate/=2.0f;  
             GetComponent<Stats>().movementSpeed*=1.5f;
             currentSpecialLength+=specialLength;
-            currentSpecialCD+=specialCD+specialLength;
         }
-    }
-    IEnumerator waitForSpecialCD(){
-    allowSpecialCDDecrease = false;
-        yield return new WaitForSeconds(1);
-        currentSpecialCD--;
-        abilityBar.SendMessage("assignAbilityCooldown",currentSpecialCD);
-    allowSpecialCDDecrease = true;
     }
     IEnumerator waitForSpecialLength(){
      allowSpecialLengthDecrease = false;          

@@ -1,0 +1,29 @@
+{
+    "Movement": {
+        "checkpoints": [
+            {
+                "steps": 3577,
+                "file_path": "results\\tempa\\Movement\\Movement-3577.onnx",
+                "reward": -7758.0,
+                "creation_time": 1694213822.7406256,
+                "auxillary_file_paths": [
+                    "results\\tempa\\Movement\\Movement-3577.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 3577,
+            "file_path": "results\\tempa\\Movement.onnx",
+            "reward": -7758.0,
+            "creation_time": 1694213822.7406256,
+            "auxillary_file_paths": [
+                "results\\tempa\\Movement\\Movement-3577.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.0.1+cpu"
+    }
+}

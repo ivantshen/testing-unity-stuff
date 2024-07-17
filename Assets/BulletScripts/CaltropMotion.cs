@@ -14,6 +14,7 @@ public class CaltropMotion : MonoBehaviour
     private bool allowHit = true;
     private bool rotateRight;
     private bool rotateLeft;
+    private float timer = 0f;
     SpriteRenderer thisSpriteRenderer;
     void Start(){
         thisSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,7 +24,14 @@ public class CaltropMotion : MonoBehaviour
         if(numberOfHits<=0){
             Destroy(gameObject);
         }
-
+        if(!allowHit){
+            timer+=Time.deltaTime;
+            if(timer>=0.55f){
+                thisSpriteRenderer.color = new Color(0.6f,0.6f,0.6f);
+                numberOfHits--; 
+                allowHit=true;
+            }
+        }
         if(rotateRight){
          transform.Rotate(Vector3.back*Time.deltaTime*(bulletSpeed*22.0f));   
         }else if(rotateLeft){
@@ -66,30 +74,21 @@ public class CaltropMotion : MonoBehaviour
     void assignRotateLeft(bool tOrF){
         rotateLeft = tOrF;
     }
-    IEnumerator damageEnemy(Collider2D other){
-        allowHit=false;
-        thisSpriteRenderer.color = Color.red;
-        if(other){
-            if(other.gameObject.tag=="Boss"){
-                other.gameObject.GetComponent<Stats>().speedChangePercent(-0.1f,0.55f);  
-            }else{
-            other.gameObject.GetComponent<Stats>().speedChangePercent(-0.5f,0.55f);    
-            }
-            bulletSpeed*=0.25f;
-        }
-        yield return new WaitForSeconds(0.55f);
-        if(other){
-         other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
-        }
-        thisSpriteRenderer.color = new Color(0.6f,0.6f,0.6f);
-        numberOfHits--;   
-        yield return new WaitForSeconds(0.2f);
-        allowHit=true;
-        }
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag!="Player"){
         if ((other.gameObject.tag=="Enemy"||other.gameObject.tag=="Boss")&&allowHit&&numberOfHits>0){ 
-            StartCoroutine(damageEnemy(other));
+            allowHit = false;
+            thisSpriteRenderer.color = Color.red;
+            if(other){
+                if(other.gameObject.tag=="Boss"){
+                    other.gameObject.GetComponent<Stats>().speedChangePercent(-0.1f,0.55f);  
+                    other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
+                }else{
+                    other.gameObject.GetComponent<Stats>().speedChangePercent(-0.5f,0.55f);  
+                    other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);  
+                }
+                bulletSpeed*=0.25f;
+            }
         }
         }
     }

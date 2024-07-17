@@ -1,0 +1,65 @@
+{
+    "Movement": {
+        "checkpoints": [
+            {
+                "steps": 22860580,
+                "file_path": "results\\Stage6Test2\\Movement\\Movement-22860580.onnx",
+                "reward": null,
+                "creation_time": 1695179020.0257566,
+                "auxillary_file_paths": [
+                    "results\\Stage6Test2\\Movement\\Movement-22860580.pt"
+                ]
+            },
+            {
+                "steps": 22869322,
+                "file_path": "results\\Stage6Test2\\Movement\\Movement-22869322.onnx",
+                "reward": null,
+                "creation_time": 1695266738.902856,
+                "auxillary_file_paths": [
+                    "results\\Stage6Test2\\Movement\\Movement-22869322.pt"
+                ]
+            },
+            {
+                "steps": 22897916,
+                "file_path": "results\\Stage6Test2\\Movement\\Movement-22897916.onnx",
+                "reward": null,
+                "creation_time": 1695267955.4322803,
+                "auxillary_file_paths": [
+                    "results\\Stage6Test2\\Movement\\Movement-22897916.pt"
+                ]
+            },
+            {
+                "steps": 22925562,
+                "file_path": "results\\Stage6Test2\\Movement\\Movement-22925562.onnx",
+                "reward": null,
+                "creation_time": 1695274429.0341575,
+                "auxillary_file_paths": [
+                    "results\\Stage6Test2\\Movement\\Movement-22925562.pt"
+                ]
+            },
+            {
+                "steps": 22928427,
+                "file_path": "results\\Stage6Test2\\Movement\\Movement-22928427.onnx",
+                "reward": null,
+                "creation_time": 1695274780.9316473,
+                "auxillary_file_paths": [
+                    "results\\Stage6Test2\\Movement\\Movement-22928427.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 22928427,
+            "file_path": "results\\Stage6Test2\\Movement.onnx",
+            "reward": null,
+            "creation_time": 1695274780.9316473,
+            "auxillary_file_paths": [
+                "results\\Stage6Test2\\Movement\\Movement-22928427.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.0.1+cu118"
+    }
+}

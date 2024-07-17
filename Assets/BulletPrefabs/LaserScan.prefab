@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6b7393c51cbfc4e8d8899e21550f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: -15
-  duration: 4
+  spinSpeed: -5
+  duration: 12
 --- !u!114 &6885068543484545443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserEndpoint: {fileID: 208406143936850931, guid: dec558d569dd5e84c9b5bfcd0b1315bd, type: 3}
-  warningSign: {fileID: 2776880281210517119, guid: 36ad4cb9ed2fb094093b14d2a5a195b0, type: 3}
-  warningLaserTime: 0.5
+  warningSign: {fileID: 6457294534806960886, guid: cf3da52377765b94bb798d7cc240a407, type: 3}
+  warningLaserTime: 2
   fireRate: 0.025
 --- !u!1 &6885068544241031835
 GameObject:

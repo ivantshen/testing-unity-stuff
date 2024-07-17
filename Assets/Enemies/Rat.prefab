@@ -312,10 +312,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd74c07f89c1f9944b49c62ab0c5c304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
-  health: 500
+  maxHealth: 250
+  health: 250
   movementSpeed: 8
   invincible: 0
+  isPlayer: 0
+  ml: 0
+  agentRewardModifier: 0.25
+  agent: {fileID: 0}
+  bossDeathReward: 500
 --- !u!114 &5846864724672162671
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,7 +41,12 @@ public class EnemyLaserMotion : MonoBehaviour
     }
     IEnumerator damagePlayer(Collider2D other){
         allowDamage = false;
-        other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);
+        if(other.gameObject.GetComponent<Stats>()){
+        other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);    
+        }else if(other.gameObject.GetComponent<MLStats>()){
+        other.gameObject.GetComponent<MLStats>().decreaseHealth(bulletDamage);       
+        }
+        
         yield return new WaitForSeconds(1.25f);
         allowDamage = true;
     }

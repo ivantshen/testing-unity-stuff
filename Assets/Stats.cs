@@ -11,6 +11,10 @@ public class Stats : MonoBehaviour
     public bool invincible = false;
     private float damageTakenMultiplier =1;
     public bool isPlayer = false;
+    [SerializeField] private bool ml = true;
+    [SerializeField] private float agentRewardModifier = 0.25f;
+    [SerializeField] private MLStats agent;
+    [SerializeField] private float bossDeathReward = 500f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +23,15 @@ public class Stats : MonoBehaviour
     public void changeDamageTakenMultiplier(float mult){
         damageTakenMultiplier+=mult;
     }
+    public void setAgent(MLStats a){
+        agent = a;
+    }
     public void decreaseHealth(int amtToDecrease){
         if(!invincible){
          health-=(int)(amtToDecrease*damageTakenMultiplier);
+         if(ml&&gameObject.tag=="Boss"){
+            agent.increaseReward(agentRewardModifier*(int)(amtToDecrease*damageTakenMultiplier));
+         }
         if(health<=0){
             if(isPlayer){
                 GameObject.FindWithTag("BackgroundCanvas").GetComponent<Image>().enabled = true;
@@ -33,6 +43,10 @@ public class Stats : MonoBehaviour
                         obj.SetActive(true);
                     }
                 }
+            }
+            if(gameObject.tag=="Boss"){
+                agent.increaseReward(bossDeathReward);
+                agent.end();
             }
             Destroy(gameObject);
         }   

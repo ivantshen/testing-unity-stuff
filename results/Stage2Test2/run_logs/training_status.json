@@ -1,0 +1,65 @@
+{
+    "Movement": {
+        "checkpoints": [
+            {
+                "steps": 499952,
+                "file_path": "results\\Stage2Test2\\Movement\\Movement-499952.onnx",
+                "reward": -142.19332520167032,
+                "creation_time": 1694894987.4167166,
+                "auxillary_file_paths": [
+                    "results\\Stage2Test2\\Movement\\Movement-499952.pt"
+                ]
+            },
+            {
+                "steps": 999948,
+                "file_path": "results\\Stage2Test2\\Movement\\Movement-999948.onnx",
+                "reward": -133.8299892478519,
+                "creation_time": 1694896138.3025048,
+                "auxillary_file_paths": [
+                    "results\\Stage2Test2\\Movement\\Movement-999948.pt"
+                ]
+            },
+            {
+                "steps": 1499938,
+                "file_path": "results\\Stage2Test2\\Movement\\Movement-1499938.onnx",
+                "reward": -115.68199453353881,
+                "creation_time": 1694897255.3351786,
+                "auxillary_file_paths": [
+                    "results\\Stage2Test2\\Movement\\Movement-1499938.pt"
+                ]
+            },
+            {
+                "steps": 1999989,
+                "file_path": "results\\Stage2Test2\\Movement\\Movement-1999989.onnx",
+                "reward": -140.68749380111694,
+                "creation_time": 1694898250.5628097,
+                "auxillary_file_paths": [
+                    "results\\Stage2Test2\\Movement\\Movement-1999989.pt"
+                ]
+            },
+            {
+                "steps": 2155421,
+                "file_path": "results\\Stage2Test2\\Movement\\Movement-2155421.onnx",
+                "reward": -103.37749445438385,
+                "creation_time": 1694898554.2026603,
+                "auxillary_file_paths": [
+                    "results\\Stage2Test2\\Movement\\Movement-2155421.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2155421,
+            "file_path": "results\\Stage2Test2\\Movement.onnx",
+            "reward": -103.37749445438385,
+            "creation_time": 1694898554.2026603,
+            "auxillary_file_paths": [
+                "results\\Stage2Test2\\Movement\\Movement-2155421.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.0.1+cu118"
+    }
+}

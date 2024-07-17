@@ -28,6 +28,7 @@ public class NathanYuAI : MonoBehaviour
     private bool stopSpitting = true;
     private float spitSpeed = 0f;
     private float phase1MoveChainSpeed = 10f;
+    private float phase2MoveChainSpeed = 10f;
     private float phase1StaggerLength =7f;
     private float spitCD = 0.85f;
     private int extraDegTracking = 0;
@@ -40,8 +41,9 @@ public class NathanYuAI : MonoBehaviour
     private GameObject ratStick;
     private GameObject[] throwQueue = new GameObject[5];
     private int scannedObjects = 0;
-    private float ratStickSpeed = 45f;
+    private float ratStickSpeed = 40f;
     private bool allowThrowing = true;
+    private float throwPredictionTime=0.35f;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,10 +92,19 @@ public class NathanYuAI : MonoBehaviour
                      transform.position = Vector2.MoveTowards(transform.position,player.transform.position,step);
                 }
             }
-           // if(stats.health<stats.maxHealth/2&currentPhase==1){
-           //     currentPhase++;
-          //      ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[0];
-          //  }
+            if(currentPhase==2){
+                if(allowTracking&&!stopTracking){
+                    StartCoroutine(waitToTrack());
+                }
+                if(allowMoves){
+                    currentCoroutine = phase2MoveChaining();
+                    StartCoroutine(currentCoroutine);
+                }
+            }
+            if((stats.health<stats.maxHealth/2&currentPhase==1)||currentPhase==1){ //testing remove or statement later
+                currentPhase=2;
+                ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[0];
+            }
             if(allowThrowing&&scannedObjects>0){
                 bool found = false;
                 int indexOfThrow = -1;
@@ -161,7 +172,7 @@ public class NathanYuAI : MonoBehaviour
         }else if(move1Selection==2){
            phase1DivideMap();
             spitSpeed = 3.35f;
-            Instantiate(warning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(warning,new Vector2(Screen.width*0.5f,Screen.height*0.5f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             yield return new WaitForSeconds(0.85f);
             stopSpitting = false;
             transform.position = new Vector2(0,0);
@@ -183,7 +194,7 @@ public class NathanYuAI : MonoBehaviour
         }else if(move2Selection==2){
             phase1DivideMap();
             spitSpeed = 3.35f;
-            Instantiate(warning,new Vector2(960f,540f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+            Instantiate(warning,new Vector2(Screen.width*0.5f,Screen.height*0.5f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
             yield return new WaitForSeconds(0.85f);
             stopSpitting = false;
             transform.position = new Vector2(0,0);
@@ -204,6 +215,22 @@ public class NathanYuAI : MonoBehaviour
         yield return new WaitForSeconds(phase1StaggerLength);
         stagger(false);
         allowMoves = true;
+    }
+    IEnumerator phase2MoveChaining(){
+        allowMoves=false;
+        phase2RatSummon();
+        phase2RatBombers();
+        yield return new WaitForSeconds(2f);
+        phase2RatBombers();
+        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(phase2MoveChainSpeed);
+
+        Instantiate(warning,new Vector2(Screen.width*0.5f,Screen.height*0.5f),Quaternion.identity,GameObject.FindWithTag("MainCanvas").transform);
+        yield return new WaitForSeconds(0.15f);
+        stopTracking=true;
+        phase2ScanHit();
+        yield return new WaitForSeconds(phase2MoveChainSpeed);
+        allowMoves=true;
     }
     private void stagger(bool TorF){
         if(TorF){
@@ -275,7 +302,47 @@ public class NathanYuAI : MonoBehaviour
     }
     private void phase2ScanHit(){
         GameObject scanner = moves[5];
-        Instantiate(scanner,new Vector2(0f,0f),Quaternion.identity);
+        Instantiate(scanner,new Vector2(0,0),Quaternion.identity);
+        transform.rotation = Quaternion.Euler(180,0,180);
+        transform.position = new Vector2(18,0);
+    }
+    private void phase2RatSummon(){
+        GameObject rat = moves[7];
+        float randX = Random.Range(-20,20);
+        Instantiate (rat, new Vector2(randX,10),Quaternion.identity);
+    }
+    private void phase2RatBombers(){
+        int amountOfRandomPlacements;
+        int amountOfLineBombs;
+        if(ratStacks>=9){
+        amountOfRandomPlacements = 8;
+        amountOfLineBombs = 4;
+        }else if(ratStacks>=6){
+        amountOfRandomPlacements = 5;
+        amountOfLineBombs = 3;
+        }else if(ratStacks>=3){
+        amountOfRandomPlacements = 3;
+        amountOfLineBombs = 2;
+        }else{
+        amountOfRandomPlacements = 2;
+        amountOfLineBombs = 1;
+        }
+        GameObject randomBomber = moves[11];
+        GameObject cheeseBombLineLeft = moves[12];
+        GameObject cheeseBombLineRight = moves[13];
+        while(amountOfRandomPlacements>0){
+            amountOfRandomPlacements--;
+            Instantiate(randomBomber,new Vector2(40f,40f),Quaternion.identity);
+        }
+        while(amountOfLineBombs>0){
+            int yBombLevel = (int)(Random.Range(25f,43.9f));
+            amountOfLineBombs--;
+            if(Random.Range(0,1f)>0.5f){
+                Instantiate(cheeseBombLineLeft,new Vector2(-40.6f,yBombLevel),Quaternion.identity);
+            }else{
+                Instantiate(cheeseBombLineRight,new Vector2(-40.6f,yBombLevel),Quaternion.identity);
+            }
+        }
     }
     public void addToThrowQueue(GameObject target){
         bool added = false;
@@ -296,34 +363,41 @@ public class NathanYuAI : MonoBehaviour
         anim.Play("throw",PlayMode.StopAll);
         yield return new WaitForSeconds(0.95f);
         anim.Play("idleRatStick",PlayMode.StopAll);
-        Vector3 throwPosition = mainCam.WorldToScreenPoint(target.transform.localPosition);
-        Vector3 currentPosition = mainCam.WorldToScreenPoint(transform.GetChild(1).GetChild(0).position);
+        if(target){
+        Rigidbody2D targetRb = target.GetComponent<Rigidbody2D>();
+        Vector2 throwPosition = new Vector2(target.transform.position.x+throwPredictionTime*targetRb.velocity.x, target.transform.position.y+throwPredictionTime*targetRb.velocity.y);
+        Vector2 currentPosition =transform.GetChild(1).GetChild(0).position;
         Vector2 offset = new Vector2(throwPosition.x-currentPosition.x,throwPosition.y-currentPosition.y);
         float angle = Mathf.Atan2(offset.y,offset.x) *Mathf.Rad2Deg;
-        GameObject stick = Instantiate(currentRatProjectile,transform.GetChild(1).GetChild(0).position,Quaternion.Euler(0f,0f,angle+270));
+        float randomAngleOffset = Random.Range(-2f,2f);
+        GameObject stick = Instantiate(currentRatProjectile,transform.GetChild(1).GetChild(0).position,Quaternion.Euler(0f,0f,angle+270+randomAngleOffset));
         Physics2D.IgnoreCollision(stick.GetComponent<Collider2D>(),GetComponent<Collider2D>());
         stick.SendMessage("assignDamage",50);
-        stick.SendMessage("assignSpeed",ratStickSpeed);   
+        stick.SendMessage("assignSpeed",ratStickSpeed);    
+        }
         allowThrowing=true;
     }
     public void IncreaseRatStack(){
         ratStacks++;
-        if(ratStacks<=3){
-            if(ratStacks==1){
+        if(ratStacks<=9){
+            if(ratStacks==3){
             ratStick.transform.localPosition= new Vector2(0,ratStick.transform.localPosition.y);
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[1];
-            currentRatProjectile = moves[7];
-            ratStickSpeed=25f;
-            }else if(ratStacks==2){
+            currentRatProjectile = moves[8];
+            ratStickSpeed=45f;
+            throwPredictionTime=0.325f;
+            }else if(ratStacks==6){
             ratStick.transform.localPosition= new Vector2(ratStick.transform.localPosition.x,0.23f*((currentSizeIncrease+1)*0.5f));
             ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[2];
-            currentRatProjectile = moves[8];
-            ratStickSpeed-=20f;
-            }else{
-            ratStick.transform.localPosition= new Vector2(-0.15f*((currentSizeIncrease+1)*0.5f),0.5f*((currentSizeIncrease+1)*0.5f));
-            ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[3];
             currentRatProjectile = moves[9];
-            ratStickSpeed=35f;
+            ratStickSpeed=50f;
+            throwPredictionTime=0.3f;
+            }else if(ratStacks==9){
+            ratStick.transform.localPosition= new Vector2(-0.17f*((currentSizeIncrease+1)*0.5f),0.6f*((currentSizeIncrease+1)*0.5f));
+            ratStick.GetComponent<SpriteRenderer>().sprite = ratStickSprites[3];
+            currentRatProjectile = moves[10];
+            ratStickSpeed=55f;
+            throwPredictionTime=0.275f;
             }
         }
     }
@@ -392,7 +466,12 @@ public class NathanYuAI : MonoBehaviour
     }
     IEnumerator collisionDamage(Collision2D other,int dmg){
         allowCollisionDamage = false;
-    other.gameObject.GetComponent<Stats>().decreaseHealth(dmg);   
+    if(other.gameObject.GetComponent<Stats>()){
+    other.gameObject.GetComponent<Stats>().decreaseHealth(dmg);     
+    }else if (other.gameObject.GetComponent<MLStats>()){
+    other.gameObject.GetComponent<MLStats>().decreaseHealth(dmg);     
+    }
+      
     yield return new WaitForSeconds(0.5f);
     allowCollisionDamage = true;
     }

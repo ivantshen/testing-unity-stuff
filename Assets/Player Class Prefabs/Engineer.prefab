@@ -173,9 +173,9 @@ MonoBehaviour:
   specialCD: 16
   sentry: {fileID: 2515335651765278034, guid: d954b4f68138f9e4fa0525cc2e84751f, type: 3}
   barricade: {fileID: 4685829572630344380, guid: 54e4d4e290a27794290a59d8403838d8, type: 3}
-  sentryDamage: 14
-  sentryFireRate: 0.4
-  sentryHealth: 120
+  sentryDamage: 12
+  sentryFireRate: 0.5
+  sentryHealth: 50
   sentryReactionTime: 100
   sentryBulletSpeed: 8
   sentryLifeDuration: 28
@@ -191,7 +191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98a4316ddd52184bbbb0d83f0362bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 480024628631355727}
   stats: {fileID: 480024628631355725}
   allowMovement: 1
 --- !u!114 &480024628631355725
@@ -211,6 +210,10 @@ MonoBehaviour:
   movementSpeed: 3.25
   invincible: 0
   isPlayer: 1
+  ml: 0
+  agentRewardModifier: 0.25
+  agent: {fileID: 0}
+  bossDeathReward: 500
 --- !u!1 &5033919995742730289
 GameObject:
   m_ObjectHideFlags: 0

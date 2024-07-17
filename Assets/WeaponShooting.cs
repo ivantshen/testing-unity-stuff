@@ -28,13 +28,6 @@ public class WeaponShooting : MonoBehaviour
             newBullet.SendMessage("assignDamage",bulletDamage);
             newBullet.SendMessage("assignSpeed",bulletSpeed); 
         }
-        if(bulletSpeed<=10){
-         ScreenShake.Instance.ShakeCamera(2f,fireRate/1.5f);   
-        }else{
-            ScreenShake.Instance.ShakeCamera(bulletSpeed/5f,fireRate/4f);   
-        }
-         
-            
             yield return new WaitForSeconds(fireRate);
             allowFire = true;
     }

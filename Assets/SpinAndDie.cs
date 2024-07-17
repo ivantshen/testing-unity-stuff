@@ -8,7 +8,7 @@ public class SpinAndDie : MonoBehaviour
     public float duration;
     private bool allowCountDown = true;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.Rotate(Vector3.forward * (spinSpeed*10.0f) * Time.deltaTime);   
         if(allowCountDown){

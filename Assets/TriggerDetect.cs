@@ -12,7 +12,7 @@ public class TriggerDetect : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.tag=="PlayerBullet"||other.gameObject.layer==11){
+        if(other.gameObject.layer==11){
             StartCoroutine(GetComponent<WanderAround>().changeDirection());
         }
     }

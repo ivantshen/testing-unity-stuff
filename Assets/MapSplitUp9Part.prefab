@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 315996363090525093}
-  m_Layer: 0
+  - component: {fileID: 4798550604702945905}
+  m_Layer: 8
   m_Name: SouthFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -24,13 +25,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158477740670372579}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -7.5, y: -10.75, z: 0}
+  m_LocalPosition: {x: -11.5, y: -11.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4499803092134187827}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!58 &4798550604702945905
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158477740670372579}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01
 --- !u!1 &1331485210240918254
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +57,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 105315078363401079}
-  m_Layer: 0
+  - component: {fileID: 4888843314714448368}
+  m_Layer: 8
   m_Name: WestFirePoint2
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -55,13 +73,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1331485210240918254}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 20.25, y: -3.75, z: 0}
+  m_LocalPosition: {x: 19.6, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4499803092134187827}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!58 &4888843314714448368
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1331485210240918254}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01
 --- !u!1 &2152411267095599641
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,6 +107,7 @@ GameObject:
   - component: {fileID: 4499803092134187827}
   - component: {fileID: 420070650231544811}
   - component: {fileID: 2152411267095599622}
+  - component: {fileID: -8198188243438144206}
   m_Layer: 0
   m_Name: MapSplitUp9Part
   m_TagString: Untagged
@@ -138,6 +173,19 @@ MonoBehaviour:
   hasWarningLaser: 1
   warningLaserTime: 1.5
   fireRate: 0.025
+--- !u!114 &-8198188243438144206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152411267095599641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3339369da4c3241b38c8aee356abfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletType: 4
 --- !u!1 &2532102311825515567
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2532102311825515564}
   - component: {fileID: 2532102311825515565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserBeam3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2532102312073964719}
   - component: {fileID: 2532102312073964716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserBeam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2532102312535607577}
   - component: {fileID: 2532102312535607558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserBeam4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2532102312873938576}
   - component: {fileID: 2532102312873938577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserBeam2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8465052754569944874}
   - component: {fileID: 7123326310637579080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WarningLaser1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +850,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5694333124788502504}
-  m_Layer: 0
+  - component: {fileID: 7349005952001261357}
+  m_Layer: 8
   m_Name: NorthFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -817,13 +866,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3555880969949001812}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 7.5, y: 10.75, z: 0}
+  m_LocalPosition: {x: 10, y: 9.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4499803092134187827}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!58 &7349005952001261357
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3555880969949001812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01
 --- !u!1 &5529985479770429341
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +899,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5149378237509695778}
   - component: {fileID: 5460313576932813982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WarningLaser4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -965,7 +1030,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2191770036042610386}
   - component: {fileID: 1323618646979153137}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WarningLaser2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1160,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1656026100546933648}
-  m_Layer: 0
+  - component: {fileID: 258056423800726158}
+  m_Layer: 8
   m_Name: EastFirePoint1
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -1110,13 +1176,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8241638640793139843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.25, y: 3.75, z: 0}
+  m_LocalPosition: {x: -20.97, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4499803092134187827}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &258056423800726158
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8241638640793139843}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.01
 --- !u!1 &8831204276617217355
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8275092492854450476}
   - component: {fileID: 7457244191026815469}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WarningLaser3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

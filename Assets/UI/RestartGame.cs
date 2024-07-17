@@ -9,7 +9,9 @@ public class RestartGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        deathScreenButton.onClick.AddListener(resetGame);
+        if(deathScreenButton){
+        deathScreenButton.onClick.AddListener(() => resetGame());    
+        }
         gameObject.SetActive(false);
     }
     void resetGame(){

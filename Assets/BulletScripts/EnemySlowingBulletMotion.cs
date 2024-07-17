@@ -16,17 +16,17 @@ public class EnemySlowingBulletMotion : MonoBehaviour
         StartCoroutine(deathTimeCountDown());
         }
     }
-    void assignSpeed(float spd){
+    public void assignSpeed(float spd){
         bulletSpeed = spd;
         if(bulletSpeed!=0){
         deathTime = (int)(deathTime/(bulletSpeed/3.0f));
         }
         
     }
-    void assignDeathTime(int death){
+    public void assignDeathTime(int death){
         deathTime = death;
     }
-    void assignDamage(int dmg){
+    public void assignDamage(int dmg){
         bulletDamage = dmg;
     }
     IEnumerator deathTimeCountDown(){
@@ -41,12 +41,17 @@ public class EnemySlowingBulletMotion : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag!="Enemy"&&other.gameObject.tag!="Boss"){
         if (other.gameObject.tag=="Player"||other.gameObject.tag=="Sentry"||other.gameObject.tag=="PlayerBarricade"){
-             other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage); 
-             other.gameObject.GetComponent<Stats>().speedChangePercent(-0.25f,1.35f);
+            if(other.gameObject.GetComponent<Stats>()){
+                other.gameObject.GetComponent<Stats>().decreaseHealth(bulletDamage);    
+                other.gameObject.GetComponent<Stats>().speedChangePercent(-0.25f,1.35f); 
+            }else if (other.gameObject.GetComponent<MLStats>()){
+                other.gameObject.GetComponent<MLStats>().decreaseHealth(bulletDamage);   
+                other.gameObject.GetComponent<MLStats>().speedChangePercent(-0.25f,1.35f);  
+            }
         }
         }
 
-        if((other.gameObject.tag!="PlayerBullet")&&other.gameObject.tag!="EnemyBullet"){
+        if((other.gameObject.tag!="PlayerBullet")&&other.gameObject.tag!="EnemyBullet"&&other.gameObject.tag!="GameBarrier"){
           Destroy(gameObject);  
         }
         }

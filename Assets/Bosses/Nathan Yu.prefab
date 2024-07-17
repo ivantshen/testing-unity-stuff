@@ -325,6 +325,11 @@ MonoBehaviour:
   health: 10000
   movementSpeed: 3.4
   invincible: 0
+  isPlayer: 0
+  ml: 0
+  agentRewardModifier: 0.25
+  agent: {fileID: 0}
+  bossDeathReward: 500
 --- !u!50 &1004908766289125158
 Rigidbody2D:
   serializedVersion: 4
@@ -368,8 +373,15 @@ MonoBehaviour:
   - {fileID: 2152411267095599641, guid: b18a62375c795704f911c84b4d7136fd, type: 3}
   - {fileID: 1476756805363136016, guid: ed5fca3fd81983d4681609b4e616f6ad, type: 3}
   - {fileID: 5581809445886032161, guid: af258309f63be7a4aacf77c5588453fb, type: 3}
-  - {fileID: 551721762977626283, guid: a439ff2d14a1df3418b3b81cdab73da8, type: 3}
+  - {fileID: 6885068543484545440, guid: 8b68fe1b8a44a21448138a3d9b4f1280, type: 3}
   - {fileID: 5479540705115901436, guid: b090e87ce0721b643a4b824a0014d25f, type: 3}
+  - {fileID: 5846864724672162673, guid: 6b2b4233464d6c74ea17e2ca89133995, type: 3}
+  - {fileID: 3878020960765661939, guid: 58601acc2bc9ec448aabe7ac2eedb2d5, type: 3}
+  - {fileID: 3878020960765661939, guid: 26ddb419b63612249ab571f7bbfbf47d, type: 3}
+  - {fileID: 3878020960765661939, guid: a3f95ededf625fe4c83b32d576a4516d, type: 3}
+  - {fileID: 8062542442065588393, guid: 5a64d894276bc1e4da6e4524aed70978, type: 3}
+  - {fileID: 6326781418092450706, guid: 172d6778fe9a9c44c933b45a516b285f, type: 3}
+  - {fileID: 458359483867990665, guid: 3e64fcd43594d0d45a712cc6cbb8564a, type: 3}
   ratStickSprites:
   - {fileID: 21300000, guid: 3c38635e7d6425c4e9013194d2d95720, type: 3}
   - {fileID: 21300000, guid: 3195a6825880fb04780ccb27c8c1c203, type: 3}

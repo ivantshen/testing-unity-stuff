@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1694973233",
+        "python_version": "3.9.13 (tags/v3.9.13:6de2ca5, May 17 2022, 16:36:42) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\ivant\\OneDrive\\Documents\\GitHub\\testing-unity-stuff\\venv\\Scripts\\mlagents-learn --run-id=Stage2Test20",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.0.1+cu118",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1694973239"
+    },
+    "total": 6.013359100000001,
+    "count": 1,
+    "self": 0.004764500000000282,
+    "children": {
+        "run_training.setup": {
+            "total": 0.14980359999999981,
+            "count": 1,
+            "self": 0.14980359999999981
+        },
+        "TrainerController.start_learning": {
+            "total": 5.858791,
+            "count": 1,
+            "self": 0.0003918000000009414,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 5.8583891,
+                    "count": 1,
+                    "self": 5.8583891
+                },
+                "trainer_threads": {
+                    "total": 1.4999999997655777e-06,
+                    "count": 1,
+                    "self": 1.4999999997655777e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 8.599999999248098e-06,
+                    "count": 1,
+                    "self": 8.599999999248098e-06
+                }
+            }
+        }
+    }
+}

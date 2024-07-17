@@ -1,0 +1,65 @@
+{
+    "Movement": {
+        "checkpoints": [
+            {
+                "steps": 500440,
+                "file_path": "results\\Stage1Test3\\Movement\\Movement-500440.onnx",
+                "reward": null,
+                "creation_time": 1694720747.341644,
+                "auxillary_file_paths": [
+                    "results\\Stage1Test3\\Movement\\Movement-500440.pt"
+                ]
+            },
+            {
+                "steps": 999943,
+                "file_path": "results\\Stage1Test3\\Movement\\Movement-999943.onnx",
+                "reward": null,
+                "creation_time": 1694747319.2994025,
+                "auxillary_file_paths": [
+                    "results\\Stage1Test3\\Movement\\Movement-999943.pt"
+                ]
+            },
+            {
+                "steps": 1499958,
+                "file_path": "results\\Stage1Test3\\Movement\\Movement-1499958.onnx",
+                "reward": 280.3309805870056,
+                "creation_time": 1694748359.270896,
+                "auxillary_file_paths": [
+                    "results\\Stage1Test3\\Movement\\Movement-1499958.pt"
+                ]
+            },
+            {
+                "steps": 1999954,
+                "file_path": "results\\Stage1Test3\\Movement\\Movement-1999954.onnx",
+                "reward": 481.18198068936664,
+                "creation_time": 1694749411.1648648,
+                "auxillary_file_paths": [
+                    "results\\Stage1Test3\\Movement\\Movement-1999954.pt"
+                ]
+            },
+            {
+                "steps": 2001499,
+                "file_path": "results\\Stage1Test3\\Movement\\Movement-2001499.onnx",
+                "reward": 487.6064508522258,
+                "creation_time": 1694749477.0210555,
+                "auxillary_file_paths": [
+                    "results\\Stage1Test3\\Movement\\Movement-2001499.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2001499,
+            "file_path": "results\\Stage1Test3\\Movement.onnx",
+            "reward": 487.6064508522258,
+            "creation_time": 1694749477.0210555,
+            "auxillary_file_paths": [
+                "results\\Stage1Test3\\Movement\\Movement-2001499.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.0.1+cu118"
+    }
+}

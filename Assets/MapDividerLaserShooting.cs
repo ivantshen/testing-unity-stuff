@@ -14,6 +14,7 @@ public class MapDividerLaserShooting : MonoBehaviour
     private bool allowWarningLaser = false;
     private bool stopWarningLaser = false;
     private LayerMask ignoreRaycastLayers;
+    private float fireTimer =0f;
     void Start(){
         if(!hasWarningLaser){
             for(int i=0;i<numLasers;i++){
@@ -37,10 +38,17 @@ public class MapDividerLaserShooting : MonoBehaviour
         }else{
             stopWarningLaser=true;
         }
-        if(allowFire){
-            StartCoroutine(fireLaser());
+        if(fireTimer<fireRate&&stopWarningLaser){
+        fireTimer+=Time.deltaTime;    
+        }else if(fireTimer>=fireRate&&stopWarningLaser){
+            fireTimer=0f;
+            fireLaser();
         }
         if(hasWarningLaser&&allowWarningLaser){
+            fireTimer+=Time.deltaTime;
+            if(fireTimer>=fireRate){
+                warningLaser();
+            }
             if(stopWarningLaser){
             allowWarningLaser=false;
             hasWarningLaser=false;
@@ -52,10 +60,10 @@ public class MapDividerLaserShooting : MonoBehaviour
             }
             allowFire = true;
             }
-            StartCoroutine(warningLaser());
+            
         }
     }
-    IEnumerator warningLaser(){
+    private void warningLaser(){
         allowWarningLaser=false;;
         for(int i=0;i<numLasers;i++){
         Transform firePoint = transform.GetChild(i).transform;
@@ -70,11 +78,10 @@ public class MapDividerLaserShooting : MonoBehaviour
             lineRenderer.SetPosition(1,firePoint.position +firePoint.right*75);
         }
         }
-        yield return new WaitForSeconds(fireRate);
         allowWarningLaser =true;
     }
     }
-    IEnumerator fireLaser(){
+    private void fireLaser(){
         allowFire=false;
         for(int i=0;i<numLasers;i++){
         Transform firePoint = transform.GetChild(i).transform;
@@ -82,7 +89,11 @@ public class MapDividerLaserShooting : MonoBehaviour
         LineRenderer lineRenderer = transform.GetChild(i+4).GetComponent<LineRenderer>();
         if(hit){
             if(hit.collider.gameObject.tag=="Player"||hit.collider.gameObject.tag=="Sentry"||hit.collider.gameObject.tag=="PlayerBarricade"){
-                hit.collider.gameObject.GetComponent<Stats>().decreaseHealth(laserDamage);
+                if(hit.collider.gameObject.GetComponent<MLStats>()){
+                    hit.collider.gameObject.GetComponent<MLStats>().decreaseHealth(laserDamage);     
+                }else if (hit.collider.gameObject.GetComponent<Stats>()){
+                    hit.collider.gameObject.GetComponent<Stats>().decreaseHealth(laserDamage);     
+                }
                 Instantiate(laserEndpoint,hit.point,Quaternion.identity);
                 lineRenderer.SetPosition(0,firePoint.position);
                 lineRenderer.SetPosition(1,hit.point);
@@ -96,7 +107,6 @@ public class MapDividerLaserShooting : MonoBehaviour
             lineRenderer.SetPosition(1,firePoint.position +firePoint.right*75);
         }
         }
-        yield return new WaitForSeconds(fireRate);
         allowFire =true;
     }
 }
